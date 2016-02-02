@@ -1,10 +1,19 @@
 
-sdk_dir = /home/mru/dev/nRF51/ws
+sdk_dir := ../sdk
+GNU_INSTALL_ROOT := /opt/gcc-arm-none-eabi-4_9-2015q3
 
 ifneq ($(wildcard $(sdk_dir)/.),)
 $(info "Found sdk in $(sdk_dir).")
 else
 $(error "Did not find sdk in $(sdk_dir).")
+endif
+
+
+
+ifneq ($(wildcard $(GNU_INSTALL_ROOT)/.),)
+$(info "Found toolchain in $(GNU_INSTALL_ROOT).")
+else
+$(error "Did not find toolchain in $(GNU_INSTALL_ROOT).")
 endif
 
 target = target.hex

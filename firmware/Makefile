@@ -9,7 +9,7 @@ all: upload
 
 
 $(build):
-	$(MAKE) -f Makefile.compile
+	$(MAKE) -f Makefile.compile GNU_INSTALL_ROOT=$(GNU_INSTALL_ROOT)
 
 $(target): $(build)
 	srec_cat $(softdevice) -intel $(build) -intel -o $@ -intel --line-length=44
