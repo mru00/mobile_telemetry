@@ -1,0 +1,19 @@
+
+sdk_dir = /home/mru/dev/nRF51/ws
+
+ifneq ($(wildcard $(sdk_dir)/.),)
+$(info "Found sdk in $(sdk_dir).")
+else
+$(error "Did not find sdk in $(sdk_dir).")
+endif
+
+target = target.hex
+builddir = .
+build = $(builddir)/_build/nrf51422_xxac_s130.hex
+softdevice = $(sdk_dir)/components/softdevice/s130/hex/s130_nrf51_1.0.0_softdevice.hex
+
+PROJECT_NAME := ble_rcmon
+
+board = BOARD_BLENANO
+
+VERBOSE = 1
