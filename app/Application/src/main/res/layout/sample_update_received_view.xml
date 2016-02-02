@@ -1,0 +1,14 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:urc="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <cc.teil.sisyphus.mru.mobiletelemetry.Views.UpdateReceivedView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#fff"
+        android:paddingBottom="40dp"
+        android:paddingLeft="20dp"
+        urc:urcColor="#f00" />
+
+</FrameLayout>

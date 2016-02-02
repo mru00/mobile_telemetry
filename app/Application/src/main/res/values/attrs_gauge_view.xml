@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="GaugeView">
+        <attr name="gaugeTitle" format="string" />
+        <attr name="gaugeDimension" format="dimension" />
+        <attr name="gaugeColor" format="color" />
+        <attr name="gaugeDrawable" format="color|reference" />
+        <attr name="gaugeStartAngle" format="float" />
+        <attr name="gaugeEndAngle" format="float" />
+    </declare-styleable>
+</resources>
