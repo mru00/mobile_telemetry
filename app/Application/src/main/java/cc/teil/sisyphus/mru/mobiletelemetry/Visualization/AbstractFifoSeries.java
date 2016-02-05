@@ -39,7 +39,7 @@ public abstract class AbstractFifoSeries<DataAdapter extends AbstractPlotDataAda
         while (getEntries().size() > 1) {
             DataAdapter first = getEntries().get(1);
             if (now - first.timeStamp > getTimeLimit()) {
-                Log.d(TAG, "trimming on element");
+                //Log.d(TAG, "trimming on element");
                 getEntries().remove(0);
             } else {
                 break;
@@ -49,7 +49,7 @@ public abstract class AbstractFifoSeries<DataAdapter extends AbstractPlotDataAda
         while (getEntries().size() > 0) {
             DataAdapter first = getEntries().get(0);
             if (now - first.timeStamp > 2 * getTimeLimit()) {
-                Log.d(TAG, "trimming on element");
+                //Log.d(TAG, "trimming on element");
                 getEntries().remove(0);
             } else {
                 break;

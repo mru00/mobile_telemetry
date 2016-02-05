@@ -34,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
@@ -141,6 +142,8 @@ public class ViewDataActivity extends Activity {
                 updateConnectionState(cc.teil.sisyphus.mru.mobiletelemetry.R.string.connected);
                 invalidateOptionsMenu();
 
+                Toast.makeText(ViewDataActivity.this, "Connected", Toast.LENGTH_SHORT).show();
+
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 mConnected = false;
                 dataCharacteristic = null;
@@ -148,6 +151,9 @@ public class ViewDataActivity extends Activity {
                 updateConnectionState(cc.teil.sisyphus.mru.mobiletelemetry.R.string.disconnected);
                 invalidateOptionsMenu();
                 clearUI();
+
+                Toast.makeText(ViewDataActivity.this, "Disconnected", Toast.LENGTH_SHORT).show();
+
             } else if (BluetoothLeService.ACTION_RSSI_UPDATE.equals(action)) {
 
                 final int rssi = intent.getIntExtra("rssi", 0);
@@ -159,6 +165,7 @@ public class ViewDataActivity extends Activity {
                 BluetoothGattService service = mBluetoothLeService.getGattServiceByUUID(UUIDs.RCMON_SERVICE_UUID);
 
                 if (service == null) {
+                    Toast.makeText(ViewDataActivity.this, "Failed to get service", Toast.LENGTH_SHORT).show();
                     throw new RuntimeException("failed to get service");
                 }
 
@@ -167,10 +174,12 @@ public class ViewDataActivity extends Activity {
                 configCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_CONFIG_UUID);
 
                 if (dataCharacteristic == null) {
+                    Toast.makeText(ViewDataActivity.this, "Failed to read data characteristic", Toast.LENGTH_SHORT).show();
                     throw new RuntimeException("failed to get data char");
                 }
 
                 if (configCharacteristic == null) {
+                    Toast.makeText(ViewDataActivity.this, "Failed to read config characteristic", Toast.LENGTH_SHORT).show();
                     throw new RuntimeException("failed to get config char");
                 }
 
@@ -466,6 +475,9 @@ public class ViewDataActivity extends Activity {
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress);
             Log.d(TAG, "Connect request result=" + result);
+
+            Toast.makeText(ViewDataActivity.this, result ? "Failed to connect to service": "Connected to service", Toast.LENGTH_SHORT).show();
+
         }
     }
 

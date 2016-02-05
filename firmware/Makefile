@@ -15,6 +15,8 @@ $(build):
 $(target): $(build)
 	srec_cat $(softdevice) -intel $< -intel -o $@ -intel --line-length=44
 
+.PHONY: build
+build: $(target)
 
 .PHONY: upload
 upload: $(target)
