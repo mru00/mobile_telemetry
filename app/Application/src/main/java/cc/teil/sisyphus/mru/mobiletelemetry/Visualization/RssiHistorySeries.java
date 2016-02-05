@@ -1,3 +1,6 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
+
+
 package cc.teil.sisyphus.mru.mobiletelemetry.Visualization;
 
 import android.os.Parcel;

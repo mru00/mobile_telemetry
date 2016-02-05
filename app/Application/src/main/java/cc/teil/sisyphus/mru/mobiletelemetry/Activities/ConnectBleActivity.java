@@ -1,3 +1,5 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
+
 /*
  * Copyright (C) 2013 The Android Open Source Project
  *

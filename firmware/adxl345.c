@@ -1,3 +1,4 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
 
 #include "adxl345.h"
 #include "app_error.h"
@@ -41,7 +42,7 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
 
     const adxl345_bw_mode_t bw = {
         .power = ADXL345_BW_LOW_POWER_NORMAL,
-        .rate = ADXL345_ODR_400
+        .rate = ADXL345_ODR_3_13
     };
 
     const adxl345_power_ctl_t pc = {
@@ -121,7 +122,6 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
 ret_code_t adxl345_read_values(nrf_drv_twi_t const * const twi, int16_t* values) {
     ret_code_t err_code = NRF_SUCCESS;
     uint8_t trx[6];
-    trx[5] = 0xa5;
     
     trx[0] = ADXL345_REG_DATAX0;
     err_code = nrf_drv_twi_tx(twi, ADXL345_SELECTED_ADDR, trx, 1, false);

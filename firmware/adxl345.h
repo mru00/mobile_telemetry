@@ -1,3 +1,5 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
+
 #ifndef ADXL345_H
 #define ADXL345_H
 
@@ -141,12 +143,22 @@ typedef enum {
 } adxl345_bw_mode_low_power_t;
 
 typedef enum {
+    ADXL345_ODR_3200 = 15,
+    ADXL345_ODR_1600 = 14,
+    ADXL345_ODR_800 = 13,
     ADXL345_ODR_400 = 12,
     ADXL345_ODR_200 = 11,
     ADXL345_ODR_100 = 10,
     ADXL345_ODR_50 = 9,
     ADXL345_ODR_25 = 8,
-    ADXL345_ODR_12_5 = 7
+    ADXL345_ODR_12_5 = 7,
+    ADXL345_ODR_6_25 = 6,
+    ADXL345_ODR_3_13 = 5,
+    ADXL345_ODR_1_56 = 4,
+    ADXL345_ODR_0_78 = 3,
+    ADXL345_ODR_0_39 = 2,
+    ADXL345_ODR_0_20 = 1,
+    ADXL345_ODR_0_10 = 0
 } adxl345_odr_t;
 
 

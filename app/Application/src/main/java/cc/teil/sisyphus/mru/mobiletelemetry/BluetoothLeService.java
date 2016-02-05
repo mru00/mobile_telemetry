@@ -1,3 +1,4 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
 /*
  * Copyright (C) 2013 The Android Open Source Project
  *
@@ -282,6 +283,10 @@ public class BluetoothLeService extends Service {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
             return false;
+        }
+
+        if (characteristic == null) {
+            throw new RuntimeException("ch = null");
         }
 
         if (readCharacteristicInProgress) {

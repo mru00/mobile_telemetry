@@ -1,3 +1,5 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
+
 /* Copyright (c) 2015 Nordic Semiconductor. All Rights Reserved.
  *
  * The information contained herein is property of Nordic Semiconductor ASA.

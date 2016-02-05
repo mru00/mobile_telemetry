@@ -1,5 +1,7 @@
+# Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
 
-sdk_dir := ../sdk
+#sdk_dir := ../sdk
+sdk_dir := /home/mru/dev/nRF51/ws
 GNU_INSTALL_ROOT := /opt/gcc-arm-none-eabi-4_9-2015q3
 
 ifneq ($(wildcard $(sdk_dir)/.),)

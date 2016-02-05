@@ -1,3 +1,5 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
+
 /* Copyright (c) 2013 Nordic Semiconductor. All Rights Reserved.
  *
  * Use of this source code is governed by a BSD-style license that can be

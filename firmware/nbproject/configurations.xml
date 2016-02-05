@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="components"
+                   displayName="components"
+                   projectFiles="true"
+                   root="../sdk/components">
+      <logicalFolder name="ble" displayName="ble" projectFiles="true">
+        <logicalFolder name="ble_advertising"
+                       displayName="ble_advertising"
+                       projectFiles="true">
+          <itemPath>../sdk/components/ble/ble_advertising/ble_advertising.c</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/ble_advertising/ble_advertising.c</itemPath>
+          <itemPath>../sdk/components/ble/ble_advertising/ble_advertising.h</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/ble_advertising/ble_advertising.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="ble_services"
+                       displayName="ble_services"
+                       projectFiles="true">
+          <logicalFolder name="ble_bps" displayName="ble_bps" projectFiles="true">
+            <itemPath>../sdk/components/ble/ble_services/ble_bps/ble_bps.c</itemPath>
+            <itemPath>../../nRF51/ws/components/ble/ble_services/ble_bps/ble_bps.c</itemPath>
+            <itemPath>../sdk/components/ble/ble_services/ble_bps/ble_bps.h</itemPath>
+            <itemPath>../../nRF51/ws/components/ble/ble_services/ble_bps/ble_bps.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="ble_dis" displayName="ble_dis" projectFiles="true">
+            <itemPath>../sdk/components/ble/ble_services/ble_dis/ble_dis.c</itemPath>
+            <itemPath>../../nRF51/ws/components/ble/ble_services/ble_dis/ble_dis.c</itemPath>
+            <itemPath>../sdk/components/ble/ble_services/ble_dis/ble_dis.h</itemPath>
+            <itemPath>../../nRF51/ws/components/ble/ble_services/ble_dis/ble_dis.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="ble_hrs" displayName="ble_hrs" projectFiles="true">
+            <itemPath>../sdk/components/ble/ble_services/ble_hrs/ble_hrs.c</itemPath>
+            <itemPath>../../nRF51/ws/components/ble/ble_services/ble_hrs/ble_hrs.c</itemPath>
+            <itemPath>../sdk/components/ble/ble_services/ble_hrs/ble_hrs.h</itemPath>
+            <itemPath>../../nRF51/ws/components/ble/ble_services/ble_hrs/ble_hrs.h</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="common" displayName="common" projectFiles="true">
+          <itemPath>../sdk/components/ble/common/ble_advdata.c</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/common/ble_advdata.c</itemPath>
+          <itemPath>../sdk/components/ble/common/ble_advdata.h</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/common/ble_advdata.h</itemPath>
+          <itemPath>../sdk/components/ble/common/ble_conn_params.c</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/common/ble_conn_params.c</itemPath>
+          <itemPath>../sdk/components/ble/common/ble_conn_params.h</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/common/ble_conn_params.h</itemPath>
+          <itemPath>../sdk/components/ble/common/ble_date_time.h</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/common/ble_date_time.h</itemPath>
+          <itemPath>../sdk/components/ble/common/ble_srv_common.c</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/common/ble_srv_common.c</itemPath>
+          <itemPath>../sdk/components/ble/common/ble_srv_common.h</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/common/ble_srv_common.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="device_manager"
+                       displayName="device_manager"
+                       projectFiles="true">
+          <itemPath>../sdk/components/ble/device_manager/device_manager.h</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/device_manager/device_manager.h</itemPath>
+          <itemPath>../sdk/components/ble/device_manager/device_manager_peripheral.c</itemPath>
+          <itemPath>../../nRF51/ws/components/ble/device_manager/device_manager_peripheral.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="device" displayName="device" projectFiles="true">
+        <itemPath>../sdk/components/device/nrf51.h</itemPath>
+        <itemPath>../../nRF51/ws/components/device/nrf51.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="drivers_nrf" displayName="drivers_nrf" projectFiles="true">
+        <logicalFolder name="common" displayName="common" projectFiles="true">
+          <itemPath>../sdk/components/drivers_nrf/common/nrf_drv_common.c</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/common/nrf_drv_common.c</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/common/nrf_drv_common.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/common/nrf_drv_common.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="delay" displayName="delay" projectFiles="true">
+          <itemPath>../sdk/components/drivers_nrf/delay/nrf_delay.c</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/delay/nrf_delay.c</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/delay/nrf_delay.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/delay/nrf_delay.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="gpiote" displayName="gpiote" projectFiles="true">
+          <itemPath>../sdk/components/drivers_nrf/gpiote/nrf_drv_gpiote.c</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/gpiote/nrf_drv_gpiote.c</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/gpiote/nrf_drv_gpiote.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/gpiote/nrf_drv_gpiote.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="hal" displayName="hal" projectFiles="true">
+          <itemPath>../sdk/components/drivers_nrf/hal/nrf_adc.c</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/hal/nrf_adc.c</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/hal/nrf_adc.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/hal/nrf_adc.h</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/hal/nrf_gpio.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/hal/nrf_gpio.h</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/hal/nrf_gpiote.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/hal/nrf_gpiote.h</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/hal/nrf_twi.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/hal/nrf_twi.h</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/hal/nrf_uart.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/hal/nrf_uart.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="pstorage" displayName="pstorage" projectFiles="true">
+          <itemPath>../sdk/components/drivers_nrf/pstorage/pstorage.c</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/pstorage/pstorage.c</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/pstorage/pstorage.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/pstorage/pstorage.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="twi_master" displayName="twi_master" projectFiles="true">
+          <itemPath>../sdk/components/drivers_nrf/twi_master/nrf_drv_twi.c</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/twi_master/nrf_drv_twi.c</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/twi_master/nrf_drv_twi.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/twi_master/nrf_drv_twi.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="uart" displayName="uart" projectFiles="true">
+          <itemPath>../sdk/components/drivers_nrf/uart/nrf_drv_uart.c</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/uart/nrf_drv_uart.c</itemPath>
+          <itemPath>../sdk/components/drivers_nrf/uart/nrf_drv_uart.h</itemPath>
+          <itemPath>../../nRF51/ws/components/drivers_nrf/uart/nrf_drv_uart.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="libraries" displayName="libraries" projectFiles="true">
+        <logicalFolder name="button" displayName="button" projectFiles="true">
+          <itemPath>../sdk/components/libraries/button/app_button.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/button/app_button.c</itemPath>
+          <itemPath>../sdk/components/libraries/button/app_button.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/button/app_button.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="fifo" displayName="fifo" projectFiles="true">
+          <itemPath>../sdk/components/libraries/fifo/app_fifo.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/fifo/app_fifo.c</itemPath>
+          <itemPath>../sdk/components/libraries/fifo/app_fifo.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/fifo/app_fifo.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="sensorsim" displayName="sensorsim" projectFiles="true">
+          <itemPath>../sdk/components/libraries/sensorsim/sensorsim.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/sensorsim/sensorsim.c</itemPath>
+          <itemPath>../sdk/components/libraries/sensorsim/sensorsim.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/sensorsim/sensorsim.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="timer" displayName="timer" projectFiles="true">
+          <itemPath>../sdk/components/libraries/timer/app_timer.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/timer/app_timer.c</itemPath>
+          <itemPath>../sdk/components/libraries/timer/app_timer.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/timer/app_timer.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="trace" displayName="trace" projectFiles="true">
+          <itemPath>../sdk/components/libraries/trace/app_trace.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/trace/app_trace.c</itemPath>
+          <itemPath>../sdk/components/libraries/trace/app_trace.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/trace/app_trace.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="uart" displayName="uart" projectFiles="true">
+          <itemPath>../sdk/components/libraries/uart/app_uart.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/uart/app_uart.h</itemPath>
+          <itemPath>../sdk/components/libraries/uart/app_uart_fifo.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/uart/app_uart_fifo.c</itemPath>
+          <itemPath>../sdk/components/libraries/uart/retarget.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/uart/retarget.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="util" displayName="util" projectFiles="true">
+          <itemPath>../sdk/components/libraries/util/app_error.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/app_error.c</itemPath>
+          <itemPath>../sdk/components/libraries/util/app_error.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/app_error.h</itemPath>
+          <itemPath>../sdk/components/libraries/util/app_util.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/app_util.h</itemPath>
+          <itemPath>../sdk/components/libraries/util/app_util_platform.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/app_util_platform.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/nordic_common.h</itemPath>
+          <itemPath>../sdk/components/libraries/util/nordic_common.h</itemPath>
+          <itemPath>../sdk/components/libraries/util/nrf_assert.c</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/nrf_assert.c</itemPath>
+          <itemPath>../sdk/components/libraries/util/nrf_assert.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/nrf_assert.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/sdk_common.h</itemPath>
+          <itemPath>../sdk/components/libraries/util/sdk_common.h</itemPath>
+          <itemPath>../sdk/components/libraries/util/sdk_errors.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/sdk_errors.h</itemPath>
+          <itemPath>../sdk/components/libraries/util/sdk_os.h</itemPath>
+          <itemPath>../../nRF51/ws/components/libraries/util/sdk_os.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="softdevice" displayName="softdevice" projectFiles="true">
+        <logicalFolder name="common" displayName="common" projectFiles="true">
+          <logicalFolder name="softdevice_handler"
+                         displayName="softdevice_handler"
+                         projectFiles="true">
+            <itemPath>../../nRF51/ws/components/softdevice/common/softdevice_handler/ant_stack_handler_types.h</itemPath>
+            <itemPath>../sdk/components/softdevice/common/softdevice_handler/ant_stack_handler_types.h</itemPath>
+            <itemPath>../sdk/components/softdevice/common/softdevice_handler/ble_stack_handler_types.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/common/softdevice_handler/ble_stack_handler_types.h</itemPath>
+            <itemPath>../sdk/components/softdevice/common/softdevice_handler/softdevice_handler.c</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/common/softdevice_handler/softdevice_handler.c</itemPath>
+            <itemPath>../sdk/components/softdevice/common/softdevice_handler/softdevice_handler.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/common/softdevice_handler/softdevice_handler.h</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="s130" displayName="s130" projectFiles="true">
+          <logicalFolder name="headers" displayName="headers" projectFiles="true">
+            <itemPath>../sdk/components/softdevice/s130/headers/ble.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/ble.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/ble_gap.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/ble_gap.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/ble_gatt.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/ble_gatt.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/ble_gattc.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/ble_gattc.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/ble_gatts.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/ble_gatts.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/ble_l2cap.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/ble_l2cap.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/ble_types.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/ble_types.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/nrf_sdm.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/nrf_sdm.h</itemPath>
+            <itemPath>../sdk/components/softdevice/s130/headers/nrf_soc.h</itemPath>
+            <itemPath>../../nRF51/ws/components/softdevice/s130/headers/nrf_soc.h</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="toolchain" displayName="toolchain" projectFiles="true">
+        <logicalFolder name="gcc" displayName="gcc" projectFiles="true">
+          <itemPath>../sdk/components/toolchain/gcc/core_cm0.h</itemPath>
+          <itemPath>../../nRF51/ws/components/toolchain/gcc/core_cm0.h</itemPath>
+          <itemPath>../sdk/components/toolchain/gcc/core_cmFunc.h</itemPath>
+          <itemPath>../../nRF51/ws/components/toolchain/gcc/core_cmFunc.h</itemPath>
+          <itemPath>../sdk/components/toolchain/gcc/core_cmInstr.h</itemPath>
+          <itemPath>../../nRF51/ws/components/toolchain/gcc/core_cmInstr.h</itemPath>
+        </logicalFolder>
+        <itemPath>../sdk/components/toolchain/system_nrf51.c</itemPath>
+        <itemPath>../../nRF51/ws/components/toolchain/system_nrf51.c</itemPath>
+        <itemPath>../sdk/components/toolchain/system_nrf51.h</itemPath>
+        <itemPath>../../nRF51/ws/components/toolchain/system_nrf51.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <df root="." name="0">
+      <df name="bsp">
+        <in>bsp.c</in>
+        <in>bsp_btn_ble.c</in>
+      </df>
+      <in>ads1115.c</in>
+      <in>adxl345.c</in>
+      <in>ble_rcmon.c</in>
+      <in>main.c</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-O3 -std=gnu99"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile -j4</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile -j4 clean</cleanCommand>
+          <executablePath>_build/nrf51422_xxac_s130.out</executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="../../nRF51/ws/components/ble/ble_advertising/ble_advertising.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/ble_advertising</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/pstorage</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/ble/ble_services/ble_bps/ble_bps.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/ble_services/ble_bps</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/ble/ble_services/ble_dis/ble_dis.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/ble_services/ble_dis</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/ble/ble_services/ble_hrs/ble_hrs.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/ble_services/ble_hrs</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/ble/common/ble_advdata.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/ble/common/ble_conn_params.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/libraries/timer</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/ble/common/ble_srv_common.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/ble/device_manager/device_manager_peripheral.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/ble/device_manager</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>config</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/pstorage</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>../../nRF51/ws/components/libraries/trace</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/drivers_nrf/common/nrf_drv_common.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/drivers_nrf/common</pElem>
+            <pElem>../../nRF51/ws/components/toolchain/gcc</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/drivers_nrf/delay/nrf_delay.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/drivers_nrf/gpiote/nrf_drv_gpiote.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/drivers_nrf/gpiote</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>../../nRF51/ws/components/toolchain/gcc</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/drivers_nrf/hal/nrf_adc.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/drivers_nrf/pstorage/pstorage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/pstorage</pElem>
+            <pElem>config</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/drivers_nrf/twi_master/nrf_drv_twi.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/twi_master</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/toolchain/gcc</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/drivers_nrf/uart/nrf_drv_uart.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/drivers_nrf/uart</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>../../nRF51/ws/components/toolchain/gcc</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/button/app_button.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/button</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>../../nRF51/ws/components/libraries/timer</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/gpiote</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/fifo/app_fifo.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/fifo</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/sensorsim/sensorsim.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/sensorsim</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/timer/app_timer.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/timer</pElem>
+            <pElem>../../nRF51/ws/components/toolchain/gcc</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/trace/app_trace.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/trace</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/libraries/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/uart/app_uart_fifo.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/libraries/fifo</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/uart/retarget.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/util/app_error.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/toolchain/gcc</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/libraries/util/nrf_assert.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/softdevice/common/softdevice_handler/softdevice_handler.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/softdevice/common/softdevice_handler</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../../nRF51/ws/components/toolchain/system_nrf51.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/toolchain</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/ble_advertising/ble_advertising.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/ble_advertising</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../sdk/components/drivers_nrf/pstorage</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/ble_services/ble_bps/ble_bps.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/ble_services/ble_bps</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/ble_services/ble_dis/ble_dis.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/ble_services/ble_dis</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/ble_services/ble_hrs/ble_hrs.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/ble_services/ble_hrs</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/common/ble_advdata.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/common</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/common/ble_conn_params.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/common</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/libraries/timer</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/common/ble_srv_common.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/ble/device_manager/device_manager_peripheral.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/ble/device_manager</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>config</pElem>
+            <pElem>../sdk/components/drivers_nrf/pstorage</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../sdk/components/libraries/trace</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/drivers_nrf/common/nrf_drv_common.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/drivers_nrf/common</pElem>
+            <pElem>../sdk/components/toolchain/gcc</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/drivers_nrf/delay/nrf_delay.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/drivers_nrf/delay</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/drivers_nrf/gpiote/nrf_drv_gpiote.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/drivers_nrf/gpiote</pElem>
+            <pElem>../sdk/components/drivers_nrf/hal</pElem>
+            <pElem>../sdk/components/toolchain/gcc</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/drivers_nrf/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/drivers_nrf/hal/nrf_adc.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/drivers_nrf/hal</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/drivers_nrf/pstorage/pstorage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/drivers_nrf/pstorage</pElem>
+            <pElem>config</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/drivers_nrf/twi_master/nrf_drv_twi.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/drivers_nrf/twi_master</pElem>
+            <pElem>../sdk/components/drivers_nrf/hal</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/toolchain/gcc</pElem>
+            <pElem>../sdk/components/drivers_nrf/delay</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/drivers_nrf/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/drivers_nrf/uart/nrf_drv_uart.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/drivers_nrf/uart</pElem>
+            <pElem>../sdk/components/drivers_nrf/hal</pElem>
+            <pElem>../sdk/components/toolchain/gcc</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/drivers_nrf/common</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/button/app_button.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/button</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/drivers_nrf/hal</pElem>
+            <pElem>../sdk/components/libraries/timer</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/drivers_nrf/gpiote</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/fifo/app_fifo.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/fifo</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/sensorsim/sensorsim.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/sensorsim</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/timer/app_timer.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/timer</pElem>
+            <pElem>../sdk/components/toolchain/gcc</pElem>
+            <pElem>../sdk/components/drivers_nrf/delay</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/trace/app_trace.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/trace</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/libraries/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/uart/app_uart_fifo.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/libraries/fifo</pElem>
+            <pElem>../sdk/components/drivers_nrf/hal</pElem>
+            <pElem>../sdk/components/drivers_nrf/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/uart/retarget.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/uart</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/util/app_error.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>../sdk/components/toolchain/gcc</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/libraries/util/nrf_assert.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="../sdk/components/softdevice/common/softdevice_handler/softdevice_handler.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/softdevice/common/softdevice_handler</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../sdk/components/toolchain/system_nrf51.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../sdk/components/toolchain</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="ads1115.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/twi_master</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../../nRF51/ws/components/libraries/trace</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="adxl345.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/twi_master</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>../../nRF51/ws/components/libraries/trace</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="ble_rcmon.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="bsp/bsp.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>../../nRF51/ws/components/libraries/timer</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="bsp/bsp_btn_ble.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <folder path="0/bsp">
+        <cTool>
+          <incDir>
+            <pElem>bsp</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="components/ble">
+        <cTool>
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="components/softdevice">
+        <cTool>
+          <incDir>
+            <pElem>../sdk/components/softdevice/s130/headers</pElem>
+            <pElem>../sdk/components/softdevice/common/softdevice_handler</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>../sdk/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>../sdk/components/libraries/util</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <item path="main.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>../../nRF51/ws/components/softdevice/s130/headers</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/hal</pElem>
+            <pElem>../../nRF51/ws/components/toolchain/gcc</pElem>
+            <pElem>../../nRF51/ws/components/device</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/machine</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include/sys</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../../nRF51/ws/components/libraries/util</pElem>
+            <pElem>../../nRF51/ws/components/ble/common</pElem>
+            <pElem>../../nRF51/ws/components/ble/ble_advertising</pElem>
+            <pElem>../../nRF51/ws/components/ble/ble_services/ble_dis</pElem>
+            <pElem>../../nRF51/ws/components/softdevice/common/softdevice_handler</pElem>
+            <pElem>../../nRF51/ws/components/ble/device_manager</pElem>
+            <pElem>../../nRF51/ws/components/libraries/timer</pElem>
+            <pElem>bsp</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/twi_master</pElem>
+            <pElem>config</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/delay</pElem>
+            <pElem>/opt/gcc-arm-none-eabi-4_9-2015q3/arm-none-eabi/include</pElem>
+            <pElem>../../nRF51/ws/components/drivers_nrf/pstorage</pElem>
+            <pElem>../../nRF51/ws/components/libraries/trace</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

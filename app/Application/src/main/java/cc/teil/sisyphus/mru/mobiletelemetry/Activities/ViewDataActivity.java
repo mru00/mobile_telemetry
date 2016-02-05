@@ -1,3 +1,4 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
 /*
  * Copyright (C) 2013 The Android Open Source Project
  *
@@ -157,15 +158,20 @@ public class ViewDataActivity extends Activity {
 
                 BluetoothGattService service = mBluetoothLeService.getGattServiceByUUID(UUIDs.RCMON_SERVICE_UUID);
 
+                if (service == null) {
+                    throw new RuntimeException("failed to get service");
+                }
+
+
                 dataCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_MEASUREMENT_UUID);
                 configCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_CONFIG_UUID);
 
                 if (dataCharacteristic == null) {
-                    Log.e(TAG, "failed to get data char");
+                    throw new RuntimeException("failed to get data char");
                 }
 
                 if (configCharacteristic == null) {
-                    Log.e(TAG, "failed to get config char");
+                    throw new RuntimeException("failed to get config char");
                 }
 
                 mBluetoothLeService.readCharacteristic(configCharacteristic);

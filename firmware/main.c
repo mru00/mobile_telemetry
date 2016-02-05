@@ -1,3 +1,5 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
+
 /* Copyright (c) 2014 Nordic Semiconductor. All Rights Reserved.
  *
  * The information contained herein is property of Nordic Semiconductor ASA.
@@ -75,10 +77,10 @@
 
 #define BATTERY_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(500, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks). */
 #define ADS1115_MEAS_INTERVAL            APP_TIMER_TICKS(250, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks). */
-#define ADXL345_MEAS_INTERVAL            APP_TIMER_TICKS(500, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks). */
+#define ADXL345_MEAS_INTERVAL            APP_TIMER_TICKS(600, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks). */
 
-#define MIN_CONN_INTERVAL                MSEC_TO_UNITS(400, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.4 seconds). */
-#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(650, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.65 second). */
+#define MIN_CONN_INTERVAL                MSEC_TO_UNITS(200, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.4 seconds). */
+#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(400, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.65 second). */
 #define SLAVE_LATENCY                    0                                          /**< Slave latency. */
 #define CONN_SUP_TIMEOUT                 MSEC_TO_UNITS(4000, UNIT_10_MS)            /**< Connection supervisory timeout (4 seconds). */
 
@@ -730,7 +732,7 @@ void ADC_IRQHandler(void) {
 /**
  * @brief ADC initialization.
  */
-void adc_config(void) {
+static void adc_config(void) {
     const nrf_adc_config_t nrf_adc_config = {
         .resolution = NRF_ADC_CONFIG_RES_10BIT,
         .scaling = NRF_ADC_CONFIG_SCALING_INPUT_ONE_THIRD,
@@ -833,17 +835,26 @@ int main(void) {
     LOG("tracing inited");
 
 
+    LOG("timer init");
     timers_init();
     create_app_timers();
+    
+    LOG("bsp  init");
     buttons_leds_init(&erase_bonds);
+    
+    LOG("ble_stack init");
     ble_stack_init();
+    
+    LOG("dm init");
     device_manager_init(erase_bonds);
 
+    LOG("gap init");
     gap_params_init();
     advertising_init();
     services_init();
     conn_params_init();
 
+    LOG("twi init");
     //adc_config();
     twi_config();
 

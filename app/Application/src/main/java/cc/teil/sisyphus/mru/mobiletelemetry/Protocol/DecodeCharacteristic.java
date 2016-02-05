@@ -1,3 +1,5 @@
+// Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
+
 package cc.teil.sisyphus.mru.mobiletelemetry.Protocol;
 
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -58,13 +60,15 @@ public class DecodeCharacteristic {
     public static MeasurementParcel decodeMeasurement(BluetoothGattCharacteristic characteristic) {
         MeasurementParcel data = new MeasurementParcel();
 
-        final int cell1 = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, 0);
-        final int cell2 = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, 2);
-        final int cell3 = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, 4);
-        final int current = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, 6);
-        final int acc_x = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, 8);
-        final int acc_y = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, 10);
-        final int acc_z = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, 12);
+        final int FORMAT_SINT16 =  BluetoothGattCharacteristic.FORMAT_SINT16;
+
+        final int cell1 = characteristic.getIntValue(FORMAT_SINT16, 0);
+        final int cell2 = characteristic.getIntValue(FORMAT_SINT16, 2);
+        final int cell3 = characteristic.getIntValue(FORMAT_SINT16, 4);
+        final int current = characteristic.getIntValue(FORMAT_SINT16, 6);
+        final int acc_x = characteristic.getIntValue(FORMAT_SINT16, 8);
+        final int acc_y = characteristic.getIntValue(FORMAT_SINT16, 10);
+        final int acc_z = characteristic.getIntValue(FORMAT_SINT16, 12);
 
         double voltageDivider = 3.;
         data.setVoltage(new double[]{voltageDivider * scaleAdc(cell1, 1), voltageDivider * scaleAdc(cell2, 1)});
