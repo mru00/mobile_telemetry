@@ -39,11 +39,11 @@ The app source is available in the `app` directory. A pre-built binary is availa
 It is possible to run the telemetry model with different hardware configurations.
 
 * Only cell voltages
-** Requires only the BLE Nano module
+ * Requires only the BLE Nano module
 
 * Accelerometer ADXL345
 
 * Cell current
-** Add the ADS1115 ADC
+ * Add the ADS1115 ADC
 
 
