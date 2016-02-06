@@ -8,7 +8,7 @@ Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
 This is a telemetry module targeting RC cars. 
 
 * Uses Bluetooth Smart (Bluetooth Low Energy) as transport
-* Uses your mobile phone to display the data
+* Uses your Android phone to display the data
 
 It currently supports 
 
@@ -20,7 +20,7 @@ The hardware is currently just the modules hand-wired on a perfboard. No proper 
 
 
 
-The telemetry module is built around the nRF51 Soc. I used a BLE Nano (http://redbearlab.com/blenano/), it nicely combines a DCDC and the nRF51.
+The telemetry module is built around the nRF51 SoC. I used a BLE Nano (http://redbearlab.com/blenano/), it nicely combines a DCDC and the nRF51.
 
 ## Firmware for the SoC
 
