@@ -1,4 +1,6 @@
 
+firmware/nbproject/private
+
 sdk/*
 !sdk/README.md
 

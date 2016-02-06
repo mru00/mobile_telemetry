@@ -1,4 +1,3 @@
-
 # Mobile Telemetry - RC Car telemetry for your Android phone
 
 Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
@@ -17,9 +16,7 @@ It currently supports
 * Total battery current (via http://www.dx.com/p/new-apm-osd-90a-voltage-current-sensor-connector-power-module-black-red-297400#.VrZpt99yuis, through ADS1115)
 * Accelerometer (through ADXL345)
 
-The hardware is currently just the modules hand-wired on a perfboard. No proper PCB is planned yet. 
-
-
+The hardware is currently just the modules hand-wired on a perfboard. No proper PCB is planned yet. Hardware is cheap stuff from dx.com.
 
 
 
@@ -58,4 +55,19 @@ It is possible to run the telemetry model with different hardware configurations
 * http://www.dx.com/p/double-sided-glass-fiber-prototyping-pcb-universal-board-12-piece-pack-145675#.VrXPBN9yuis
 
 * http://www.dx.com/p/new-apm-osd-90a-voltage-current-sensor-connector-power-module-black-red-297400#.VrZpt99yuis
+
+## Next steps
+
+
+* make the app better
+ * almost no error handling, no UX
+
+* draw own pcb, 
+ * current sensor 
+  * http://www.ti.com/product/INA220
+  * INA219
+  * http://www.infineon.com/cms/de/product/sensor/magnetic-current-sensor/channel.html?channel=db3a30433afc7e3e013b288381965ab4
+
+ * find a better nRF51 module, https://www.nordicsemi.com/Products/3rd-Party-Bluetooth-Smart-Modules
+  * http://www.hosiden.co.jp/en/news/product/hrm1017.html
 
