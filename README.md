@@ -13,9 +13,9 @@ This is a telemetry model targeting RC cars.
 
 It currently supports 
 
-* Cell voltages
-* Total battery current
-* Accelerometer
+* Cell voltages (either through ADS1115 or SoC-builtin ADCs)
+* Total battery current (through ADS1115)
+* Accelerometer (through ADXL345)
 
 The hardware is currently just the modules hand-wired on a perfboard. No proper PCB is planned yet. 
 
@@ -45,5 +45,14 @@ It is possible to run the telemetry model with different hardware configurations
 
 * Cell current
  * Add the ADS1115 ADC
+
+
+## Used hardware modules
+
+* http://www.dx.com/p/geeetech-6dof-adxl345-and-itg3205-digital-combo-board-red-384317#.VrXOlN9yuis
+
+* http://www.dx.com/p/ads1115-16-bit-i2c-adc-development-board-module-for-arduino-raspberry-pi-blue-384030#.VrXOyd9yuis
+
+* http://www.dx.com/p/double-sided-glass-fiber-prototyping-pcb-universal-board-12-piece-pack-145675#.VrXPBN9yuis
 
 
