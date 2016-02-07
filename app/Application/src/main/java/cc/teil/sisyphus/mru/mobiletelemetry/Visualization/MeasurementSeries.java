@@ -35,9 +35,6 @@ public class MeasurementSeries extends AbstractFifoSeries<MeasurementPlotDataAda
 
             @Override
             public String getTitle() { return title; }
-
-            @Override
-            public String getUnit() { return "V"; }
         };
     }
 
@@ -52,8 +49,6 @@ public class MeasurementSeries extends AbstractFifoSeries<MeasurementPlotDataAda
                 return "Total";
             }
 
-            @Override
-            public String getUnit() { return "A"; }
         };
     }
 
@@ -69,9 +64,6 @@ public class MeasurementSeries extends AbstractFifoSeries<MeasurementPlotDataAda
             public String getTitle() {
                 return axisNameLookup[targetIndex];
             }
-
-            @Override
-            public String getUnit() { return "g"; }
         };
     }
 
@@ -88,9 +80,6 @@ public class MeasurementSeries extends AbstractFifoSeries<MeasurementPlotDataAda
             public String getTitle() {
                 return axisNameLookup[targetIndex];
             }
-
-            @Override
-            public String getUnit() { return "deg/sec"; }
         };
     }
 

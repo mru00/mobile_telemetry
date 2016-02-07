@@ -103,8 +103,6 @@ public abstract class AbstractFifoSeries<DataAdapter extends AbstractPlotDataAda
         }
 
         abstract public Number getData(DataAdapter dataAdapter);
-        abstract public String getUnit();
-
     }
 
 }

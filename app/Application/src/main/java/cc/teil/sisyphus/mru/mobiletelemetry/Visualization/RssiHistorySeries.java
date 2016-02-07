@@ -29,11 +29,6 @@ public class RssiHistorySeries extends AbstractFifoSeries<RssiPlotDataAdapter> {
             }
 
             @Override
-            public String getUnit() {
-                return null;
-            }
-
-            @Override
             public String getTitle() {
                 return "Rssi";
             }

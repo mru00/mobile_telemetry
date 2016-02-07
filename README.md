@@ -70,4 +70,6 @@ It is possible to run the telemetry model with different hardware configurations
 
  * find a better nRF51 module, https://www.nordicsemi.com/Products/3rd-Party-Bluetooth-Smart-Modules
   * http://www.hosiden.co.jp/en/news/product/hrm1017.html
+  * or even Microchip RN2040
+
 
