@@ -52,20 +52,18 @@ module logo() {
     linear_extrude(height=2)
         text(
             text = "Mobile Telemetry",
-            size = 7,
+            size = 6,
     halign = "center",
-    valign = "center",
-            font = "Arial");
+    valign = "center");
 }
 
 module logo2() {
     linear_extrude(height=2)
         text(
-            text = "mru 2016",
-            size = 7,
+            text = "(C) 2016 mru",
+            size = 5,
     halign = "center",
-    valign = "center",
-            font = "Arial");
+    valign = "center");
 }
 
 
@@ -203,7 +201,7 @@ module box_w_holder() {
 
 
 
-//box_w_holder();
+box_w_holder();
 
 translate([90, 0, 0]) 
 cover();
