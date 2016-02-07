@@ -2,6 +2,10 @@
 
 # Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
 
+pushd casing
+openscad -o casing_production.stl -D 'quality="production"' casing.scad
+popd
+
 pushd firmware
 make clean
 make build -j8
