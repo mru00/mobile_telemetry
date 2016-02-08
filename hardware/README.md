@@ -6,7 +6,4 @@ ADXL345 http://www.dx.com/p/geeetech-6dof-adxl345-and-itg3205-digital-combo-boar
 
 ADS1115 http://www.dx.com/p/ads1115-16-bit-i2c-adc-development-board-module-for-arduino-raspberry-pi-blue-384030#.VrReC99yuis
 
-
-
-![picture](board1.jpg?raw=true "Board")
-
+![board1](https://cloud.githubusercontent.com/assets/581904/12903018/ebbab2b8-cec4-11e5-9fea-841592ad5187.jpg)
