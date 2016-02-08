@@ -13,7 +13,7 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
 
     uint8_t trx[10];
 
-    const adxl345_data_format df = {
+    const adxl345_data_format_t df = {
         .self_test = ADXL345_DATA_FORMAT_SELFTEST_DISABLE,
         .spi = ADXL345_DATA_FORMAT_SPI_3WIRE,
         .int_invert = ADXL345_DATA_FORMAT_INT_ACTIVE_HIGH,
@@ -23,7 +23,7 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
         .range = ADXL345_DATA_FORMAT_RANGE_4
     };
 
-    const adxl345_int_map im = {
+    const adxl345_int_map_t im = {
         .data_ready = ADXL345_INT_MAP_INT0,
         .single_tap = ADXL345_INT_MAP_INT0,
         .double_tap = ADXL345_INT_MAP_INT0,
@@ -34,7 +34,7 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
         .overrun = ADXL345_INT_MAP_INT0
     };
 
-    const adxl345_fifo_ctl fc = {
+    const adxl345_fifo_ctl_t fc = {
         .trigger = ADXL345_FIFO_TRIGGER_INT1,
         .samples = 12,
         .mode = ADXL345_FIFO_MODE_BYPASS

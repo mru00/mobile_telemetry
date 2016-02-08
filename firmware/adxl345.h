@@ -91,27 +91,27 @@ typedef union {
         adxl_data_format_selftest_t self_test : 1;
     };
     uint8_t value;
-} adxl345_data_format;
+} adxl345_data_format_t;
 
 typedef enum {
     ADXL345_INT_MAP_INT0 = 0,
     ADXL345_INT_MAP_INT1 = 1
-} adxl345_int_map_t;
+} adxl345_int_map_0_1_t;
 
 typedef union {
 
     struct {
-        adxl345_int_map_t data_ready : 1;
-        adxl345_int_map_t single_tap : 1;
-        adxl345_int_map_t double_tap : 1;
-        adxl345_int_map_t activity : 1;
-        adxl345_int_map_t inactivity : 1;
-        adxl345_int_map_t free_fall : 1;
-        adxl345_int_map_t watermark : 1;
-        adxl345_int_map_t overrun : 1;
+        adxl345_int_map_0_1_t data_ready : 1;
+        adxl345_int_map_0_1_t single_tap : 1;
+        adxl345_int_map_0_1_t double_tap : 1;
+        adxl345_int_map_0_1_t activity : 1;
+        adxl345_int_map_0_1_t inactivity : 1;
+        adxl345_int_map_0_1_t free_fall : 1;
+        adxl345_int_map_0_1_t watermark : 1;
+        adxl345_int_map_0_1_t overrun : 1;
     };
     uint8_t value;
-} adxl345_int_map;
+} adxl345_int_map_t;
 
 typedef enum {
     ADXL345_FIFO_MODE_BYPASS = 0,
@@ -132,7 +132,7 @@ typedef union {
         adxl345_fifo_mode_t mode : 2;
     };
     uint8_t value;
-} adxl345_fifo_ctl;
+} adxl345_fifo_ctl_t;
 
 
 
@@ -219,8 +219,8 @@ uint8_t:
 
 
 STATIC_ASSERT(sizeof (adxl345_bw_mode_t) == 1);
-STATIC_ASSERT(sizeof (adxl345_int_map) == 1);
-STATIC_ASSERT(sizeof (adxl345_fifo_ctl) == 1);
+STATIC_ASSERT(sizeof (adxl345_int_map_t) == 1);
+STATIC_ASSERT(sizeof (adxl345_fifo_ctl_t) == 1);
 STATIC_ASSERT(sizeof (adxl345_power_ctl_t) == 1);
 
 ret_code_t adxl345_init(nrf_drv_twi_t const * const twi);
