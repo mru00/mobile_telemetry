@@ -19,6 +19,11 @@ It currently supports
 The hardware is currently just the modules hand-wired on a perfboard. No proper PCB is planned yet. Hardware is cheap stuff from dx.com.
 
 
+![Screenshot](app/Screenshot1.png?raw=true "Screenshot 1")
+![Screenshot](app/Screenshot2.png?raw=true "Screenshot 2")
+![picture](hardware/board1.jpg?raw=true "Board")
+
+
 
 The telemetry module is built around the nRF51 SoC. I used a BLE Nano (http://redbearlab.com/blenano/), it nicely combines a DCDC and the nRF51.
 
