@@ -18,10 +18,9 @@ It currently supports
 
 The hardware is currently just the modules hand-wired on a perfboard. No proper PCB is planned yet. Hardware is cheap stuff from dx.com.
 
-
-![Screenshot](app/Screenshot1.png?raw=true "Screenshot 1")
-![Screenshot](app/Screenshot2.png?raw=true "Screenshot 2")
-![picture](hardware/board1.jpg?raw=true "Board")
+![screenshot1](https://cloud.githubusercontent.com/assets/581904/12903013/e6d4bb40-cec4-11e5-8214-e05cf1bb4177.png)
+![screenshot2](https://cloud.githubusercontent.com/assets/581904/12903014/e6e57c0a-cec4-11e5-8e2d-675b02c0b3fd.png)
+![board1](https://cloud.githubusercontent.com/assets/581904/12903018/ebbab2b8-cec4-11e5-9fea-841592ad5187.jpg)
 
 
 
