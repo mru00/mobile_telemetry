@@ -46,6 +46,8 @@ It is possible to run the telemetry model with different hardware configurations
 
 ## Used hardware modules
 
+The module is just the following modules wired together.
+
 * http://redbearlab.com/blenano/
 
 * http://www.dx.com/p/geeetech-6dof-adxl345-and-itg3205-digital-combo-board-red-384317#.VrXOlN9yuis

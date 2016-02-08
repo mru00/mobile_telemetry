@@ -2,14 +2,12 @@
 
 # Copyright (C) 2015 - 2016 mru@sisyphus.teil.cc
 
-pushd casing
-openscad -o casing_production.stl -D 'quality="production"' casing.scad
-popd
+make -C casing -j3
 
-pushd firmware
-make clean
-make build -j8
-popd
+
+make -C firmware clean
+make -C firmware build -j8
+
 
 pushd app
 bash gradlew clean
@@ -21,5 +19,5 @@ mkdir -p release
 rm release/*
 
 cp firmware/target.hex release
-cp app/Application/build/outputs/apk/*.apk release
+cp app/MobileTelemetry/build/outputs/apk/*.apk release
 
