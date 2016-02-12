@@ -19,6 +19,7 @@ public class MeasurementPlotDataAdapter extends AbstractPlotDataAdapter implemen
     }
 
     protected MeasurementPlotDataAdapter(Parcel in) {
+        timeStampMilli = in.readDouble();
         data = in.readParcelable(MeasurementParcel.class.getClassLoader());
     }
 
@@ -41,6 +42,7 @@ public class MeasurementPlotDataAdapter extends AbstractPlotDataAdapter implemen
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(timeStampMilli);
         dest.writeParcelable(data, flags);
     }
 }

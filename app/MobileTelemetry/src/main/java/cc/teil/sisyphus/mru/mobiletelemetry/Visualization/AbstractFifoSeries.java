@@ -5,7 +5,6 @@ package cc.teil.sisyphus.mru.mobiletelemetry.Visualization;
 import android.graphics.Canvas;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.animation.AnimationUtils;
 
 import com.androidplot.Plot;
 import com.androidplot.PlotListener;
@@ -20,58 +19,71 @@ import java.util.List;
 public abstract class AbstractFifoSeries<DataAdapter extends AbstractPlotDataAdapter> implements PlotListener, Parcelable {
 
     private final static String TAG = AbstractFifoSeries.class.getSimpleName();
-    private double plotTime;
-    private double timeLimit = 12e4;
+    private double plotTimeMilli;
+    private double timeLimitMilli = 12e4;
     private List<DataAdapter> entries = new ArrayList<>();
 
+    private static double t0 = System.nanoTime();
 
-    protected AbstractFifoSeries() {
+    private double getNowMilli() {
+        final double now = 1e-6*(System.nanoTime()-t0);
+//        Log.w(TAG, "now:" + now);
+        return now;
     }
 
+    protected AbstractFifoSeries() {}
+
     public void add(DataAdapter data) {
-        double now = AnimationUtils.currentAnimationTimeMillis();
-        data.timeStamp = now;
+        final double now = getNowMilli();
+        data.timeStampMilli = now;
         getEntries().add(data);
         trim(now);
     }
 
-    public void trim(double now) {
-        while (getEntries().size() > 1) {
-            DataAdapter first = getEntries().get(1);
-            if (now - first.timeStamp > getTimeLimit()) {
-                //Log.d(TAG, "trimming on element");
-                getEntries().remove(0);
-            } else {
-                break;
-            }
-        }
+    public void copyFrom(AbstractFifoSeries<DataAdapter> other) {
+        //Log.w(TAG, "copy from " + other.getClass().getSimpleName() + " " + other.getEntries().size());
+        setEntries(other.getEntries());
+        //timeLimitMilli = other.timeLimitMilli;
+    }
 
-        while (getEntries().size() > 0) {
-            DataAdapter first = getEntries().get(0);
-            if (now - first.timeStamp > 2 * getTimeLimit()) {
-                //Log.d(TAG, "trimming on element");
-                getEntries().remove(0);
-            } else {
-                break;
+    public void trim(double now) {
+            while (getEntries().size() > 1) {
+                DataAdapter first = getEntry(1);
+                if (now - first.timeStampMilli > getTimeLimitMilli()) {
+                    //Log.w(TAG, "trimming on element");
+                    getEntries().remove(0);
+                } else {
+                    break;
+                }
             }
-        }
+
+            while (getEntries().size() > 0) {
+                DataAdapter first = getEntry(0);
+                if (now - first.timeStampMilli > 2 * getTimeLimitMilli()) {
+                    //Log.w(TAG, "trimming on element");
+                    getEntries().remove(0);
+                } else {
+                    break;
+                }
+            }
+
     }
 
     @Override
     public void onBeforeDraw(Plot source, Canvas canvas) {
-        plotTime = AnimationUtils.currentAnimationTimeMillis();
-        trim(plotTime);
+        plotTimeMilli = getNowMilli();
+        //trim(plotTimeMilli);
     }
 
     @Override
     public void onAfterDraw(Plot source, Canvas canvas) {
     }
 
-    public double getTimeLimit() { return timeLimit; }
-    public double getMaxSeconds() { return timeLimit/1000.0; }
+    public double getTimeLimitMilli() { return timeLimitMilli; }
+    public double getMaxSeconds() { return timeLimitMilli /1000.0; }
 
-    public void setTimeLimit(double timeLimit) {
-        this.timeLimit = timeLimit;
+    public void setTimeLimitMilli(double timeLimitMilli) {
+        this.timeLimitMilli = timeLimitMilli;
     }
 
     protected DataAdapter getEntry(int index) {
@@ -94,12 +106,12 @@ public abstract class AbstractFifoSeries<DataAdapter extends AbstractPlotDataAda
 
         @Override
         public Number getX(int index) {
-            return (getEntries().get(index).timeStamp - plotTime) / 1e3;
+            return (getEntry(index).timeStampMilli - plotTimeMilli) / 1e3;
         }
 
         @Override
         public Number getY(int index) {
-            return getData(getEntries().get(index));
+            return getData(getEntry(index));
         }
 
         abstract public Number getData(DataAdapter dataAdapter);

@@ -17,6 +17,8 @@
 
 package cc.teil.sisyphus.mru.mobiletelemetry;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -30,30 +32,40 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
+import cc.teil.sisyphus.mru.mobiletelemetry.Parcels.MeasurementParcel;
 import cc.teil.sisyphus.mru.mobiletelemetry.Parcels.RawByteParcel;
 import cc.teil.sisyphus.mru.mobiletelemetry.Protocol.DecodeCharacteristic;
+import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.MeasurementPlotDataAdapter;
+import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.MeasurementSeries;
+import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.RssiHistorySeries;
+import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.RssiPlotDataAdapter;
 
 /**
  * Service for managing connection and data communication with a GATT server hosted on a
  * given Bluetooth LE device.
  */
-public class BluetoothLeService extends Service {
+public class MeasurementService extends Service {
 
-    public final static String packagename = BluetoothLeService.class.getPackage().getName();
+    public final static String packagename = MeasurementService.class.getPackage().getName();
     public final static String ACTION_GATT_CONNECTED = packagename + ".ACTION_GATT_CONNECTED";
     public final static String ACTION_GATT_DISCONNECTED = packagename + ".ACTION_GATT_DISCONNECTED";
     public final static String ACTION_GATT_SERVICES_DISCOVERED = packagename + ".ACTION_GATT_SERVICES_DISCOVERED";
     public final static String ACTION_DATA_AVAILABLE = packagename + ".ACTION_DATA_AVAILABLE";
     public final static String ACTION_RSSI_UPDATE = packagename + ".ACTION_RSSI_UPDATE";
     public final static String EXTRA_DATA = packagename + ".EXTRA_DATA";
+    public final static String EXTRA_MEASUREMENT_SERIES = packagename + ".EXTRA_MEASUREMENT_SERIES";
+    public final static String EXTRA_RSSI_SERIES = packagename + ".EXTRA_RSSI_SERIES";
     public final static String EXTRA_UUID = packagename + ".EXTRA_UUID";
 
-    private final static String TAG = BluetoothLeService.class.getSimpleName();
+    private final static String TAG = MeasurementService.class.getSimpleName();
 
     private static final int STATE_DISCONNECTED = 0;
     private static final int STATE_CONNECTING = 1;
@@ -66,6 +78,10 @@ public class BluetoothLeService extends Service {
     private int mConnectionState = STATE_DISCONNECTED;
 
     private boolean readCharacteristicInProgress = false;
+
+
+    private MeasurementSeries measurementSeries = new MeasurementSeries();
+    private RssiHistorySeries rssiHistorySeries = new RssiHistorySeries();
 
 //    private final CalibrationDataSource cds = new CalibrationDataSource(this);
 //    private final Calibration calibCell1 = cds.getCalibration("cell1");
@@ -93,18 +109,53 @@ public class BluetoothLeService extends Service {
                 }
                 readCharacteristicInProgress = false;
 
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(notificationId, getNotification("Connected"));
+
+
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 intentAction = ACTION_GATT_DISCONNECTED;
                 mConnectionState = STATE_DISCONNECTED;
 
                 Log.i(TAG, "Disconnected from GATT server.");
                 broadcastUpdate(intentAction);
+
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(notificationId, getNotification("Disconnected"));
+
             }
         }
 
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
+
+                final BluetoothGattService service = gatt.getService(UUIDs.RCMON_SERVICE_UUID);
+
+                if (service == null) {
+                    Toast.makeText(MeasurementService.this, "Failed to get service", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    final BluetoothGattCharacteristic configCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_CONFIG_UUID);
+
+                    if (configCharacteristic == null) {
+                        Toast.makeText(MeasurementService.this, "Failed to read config characteristic", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        readCharacteristic(configCharacteristic);
+                    }
+
+                    dataCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_MEASUREMENT_UUID);
+
+                    if (dataCharacteristic == null) {
+                        Toast.makeText(MeasurementService.this, "Failed to read data characteristic", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
             } else {
                 Log.w(TAG, "onServicesDiscovered received: " + status);
@@ -133,15 +184,19 @@ public class BluetoothLeService extends Service {
 
         @Override
         public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
+            readCharacteristicInProgress = false;
             if (status == BluetoothGatt.GATT_SUCCESS) {
+                rssiHistorySeries.add(new RssiPlotDataAdapter(rssi));
                 final Intent intent = new Intent(ACTION_RSSI_UPDATE);
                 intent.putExtra("rssi", rssi);
+                intent.putExtra(EXTRA_RSSI_SERIES, rssiHistorySeries);
                 sendBroadcast(intent);
             } else {
                 Log.w(TAG, "failed to read rssi");
             }
         }
     };
+    private int notificationId = 101;
 
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
@@ -158,7 +213,10 @@ public class BluetoothLeService extends Service {
             Log.w(TAG, "received config");
             intent.putExtra(EXTRA_DATA, DecodeCharacteristic.decodeConfig(characteristic));
         } else if (UUIDs.isMeasurementCharacteristic(characteristic)) {
-            intent.putExtra(EXTRA_DATA, DecodeCharacteristic.decodeMeasurement(characteristic));
+            final MeasurementParcel data =DecodeCharacteristic.decodeMeasurement(characteristic);
+            measurementSeries.add(new MeasurementPlotDataAdapter(data));
+            intent.putExtra(EXTRA_DATA, data);
+            intent.putExtra(EXTRA_MEASUREMENT_SERIES, measurementSeries);
         } else {
             intent.putExtra(EXTRA_DATA, new RawByteParcel(characteristic.getValue()));
         }
@@ -177,6 +235,29 @@ public class BluetoothLeService extends Service {
         // invoked when the UI is disconnected from the Service.
         close();
         return super.onUnbind(intent);
+    }
+
+
+    private final ScheduledExecutorService executor_ = Executors.newSingleThreadScheduledExecutor();
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        this.executor_.scheduleWithFixedDelay(fetchDataTimer, 1500L, 500L, TimeUnit.MILLISECONDS);
+
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+// notificationId allows you to update the notification later on.
+        mNotificationManager.notify(notificationId, getNotification("Started"));
+    }
+
+    private Notification getNotification(String text) {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.notification_template_icon_bg)
+                        .setContentTitle("MobileTelemetry")
+                        .setContentText(text);
+        return mBuilder.build();
     }
 
     /**
@@ -203,6 +284,27 @@ public class BluetoothLeService extends Service {
 
         return true;
     }
+
+    private static boolean dataOrRssi = false;
+    private BluetoothGattCharacteristic dataCharacteristic;
+    private final Runnable fetchDataTimer = new Runnable() {
+        @Override
+        public void run() {
+            if (dataCharacteristic == null) return;
+            if (readCharacteristicInProgress) return;
+
+            if (dataOrRssi) {
+                if (!readCharacteristic(dataCharacteristic)) {
+                    Log.w(TAG, "failed to read characteristic");
+                }
+            }
+            else {
+                readCharacteristicInProgress = true;
+                mBluetoothGatt.readRemoteRssi();
+            }
+            dataOrRssi = !dataOrRssi;
+        }
+    };
 
     /**
      * Connects to the GATT server hosted on the Bluetooth LE device.
@@ -239,7 +341,7 @@ public class BluetoothLeService extends Service {
 
         // We want to directly connect to the device, so we are setting the autoConnect
         // parameter to false.
-        mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
+        mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
         Log.d(TAG, "Trying to create a new connection.");
         mBluetoothDeviceAddress = address;
         mConnectionState = STATE_CONNECTING;
@@ -294,7 +396,6 @@ public class BluetoothLeService extends Service {
             return false;
         }
 
-        mBluetoothGatt.readRemoteRssi();
 
         readCharacteristicInProgress = true;
         return mBluetoothGatt.readCharacteristic(characteristic);
@@ -324,25 +425,10 @@ public class BluetoothLeService extends Service {
         */
     }
 
-    /**
-     * Retrieves a list of supported GATT services on the connected device. This should be
-     * invoked only after {@code BluetoothGatt#discoverServices()} completes successfully.
-     *
-     * @return A {@code List} of supported services.
-     */
-    public List<BluetoothGattService> getSupportedGattServices() {
-        if (mBluetoothGatt == null) return null;
-        return mBluetoothGatt.getServices();
-    }
-
-    public BluetoothGattService getGattServiceByUUID(UUID uuid) {
-        if (mBluetoothGatt == null) return null;
-        return mBluetoothGatt.getService(uuid);
-    }
 
     public class LocalBinder extends Binder {
-        public BluetoothLeService getService() {
-            return BluetoothLeService.this;
+        public MeasurementService getService() {
+            return MeasurementService.this;
         }
     }
 

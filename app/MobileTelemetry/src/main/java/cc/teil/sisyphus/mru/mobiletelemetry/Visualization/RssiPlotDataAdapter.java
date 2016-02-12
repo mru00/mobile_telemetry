@@ -18,6 +18,7 @@ public class RssiPlotDataAdapter extends AbstractPlotDataAdapter implements Parc
     }
 
     protected RssiPlotDataAdapter(Parcel in) {
+        timeStampMilli = in.readDouble();
         rssi = in.readInt();
     }
 
@@ -40,6 +41,7 @@ public class RssiPlotDataAdapter extends AbstractPlotDataAdapter implements Parc
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(timeStampMilli);
         dest.writeInt(rssi);
     }
 }

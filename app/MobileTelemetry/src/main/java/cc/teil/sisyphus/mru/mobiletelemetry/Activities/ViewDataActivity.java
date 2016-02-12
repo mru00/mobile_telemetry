@@ -18,8 +18,6 @@
 package cc.teil.sisyphus.mru.mobiletelemetry.Activities;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -36,6 +35,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidplot.ui.AnchorPosition;
+import com.androidplot.ui.DynamicTableModel;
+import com.androidplot.ui.FixedTableModel;
+import com.androidplot.ui.Size;
+import com.androidplot.ui.SizeLayoutType;
+import com.androidplot.ui.XLayoutStyle;
+import com.androidplot.ui.YLayoutStyle;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
@@ -45,26 +51,21 @@ import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-import cc.teil.sisyphus.mru.mobiletelemetry.BluetoothLeService;
+import cc.teil.sisyphus.mru.mobiletelemetry.MeasurementService;
 import cc.teil.sisyphus.mru.mobiletelemetry.Parcels.ConfigParcel;
 import cc.teil.sisyphus.mru.mobiletelemetry.Parcels.MeasurementParcel;
 import cc.teil.sisyphus.mru.mobiletelemetry.R;
 import cc.teil.sisyphus.mru.mobiletelemetry.UUIDs;
-import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.MeasurementPlotDataAdapter;
 import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.MeasurementSeries;
 import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.RssiHistorySeries;
-import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.RssiPlotDataAdapter;
 import cc.teil.sisyphus.mru.mobiletelemetry.Visualization.TimeLabelFormat;
 
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
  * and display GATT services and characteristics supported by the device.  The Activity
- * communicates with {@code BluetoothLeService}, which in turn interacts with the
+ * communicates with {@code MeasurementService}, which in turn interacts with the
  * Bluetooth LE API.
  */
 public class ViewDataActivity extends Activity {
@@ -72,7 +73,7 @@ public class ViewDataActivity extends Activity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
     private final static String TAG = ViewDataActivity.class.getSimpleName();
-    private final ScheduledExecutorService executor_ = Executors.newSingleThreadScheduledExecutor();
+
 
     private TextView viewConnectionState;
     private TextView viewVoltageCell1;
@@ -80,6 +81,8 @@ public class ViewDataActivity extends Activity {
     private TextView viewVoltageCellDiff;
     private TextView viewCurrent;
     private TextView viewRssi;
+
+
     private MeasurementSeries measurementSeries = new MeasurementSeries();
     private RssiHistorySeries rssiHistorySeries = new RssiHistorySeries();
 
@@ -90,40 +93,30 @@ public class ViewDataActivity extends Activity {
 
     private String mDeviceName;
     private String mDeviceAddress;
-    private BluetoothLeService mBluetoothLeService;
+    private MeasurementService mMeasurementService;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
-            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
-            if (!mBluetoothLeService.initialize()) {
+            mMeasurementService = ((MeasurementService.LocalBinder) service).getService();
+            if (!mMeasurementService.initialize()) {
                 Log.e(TAG, "Unable to initialize Bluetooth");
                 finish();
             }
             // Automatically connects to the device upon successful start-up initialization.
-            mBluetoothLeService.connect(mDeviceAddress);
+            mMeasurementService.connect(mDeviceAddress);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            mBluetoothLeService = null;
+            mMeasurementService = null;
         }
     };
-    private BluetoothGattCharacteristic dataCharacteristic;
-    private final Runnable fetchDataTimer = new Runnable() {
-        @Override
-        public void run() {
-            if (mBluetoothLeService == null || dataCharacteristic == null) return;
-            if (!mBluetoothLeService.readCharacteristic(dataCharacteristic)) {
-                Log.w(TAG, "failed to read characteristic");
-            }
-        }
-    };
-    private BluetoothGattCharacteristic configCharacteristic;
+
     private boolean mConnected = false;
-    private int cellCount = 0;
+
     // Handles various events fired by the Service.
     // ACTION_GATT_CONNECTED: connected to a GATT server.
     // ACTION_GATT_DISCONNECTED: disconnected from a GATT server.
@@ -135,63 +128,41 @@ public class ViewDataActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
 
             final String action = intent.getAction();
-            if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
+            if (MeasurementService.ACTION_GATT_CONNECTED.equals(action)) {
                 mConnected = true;
-                dataCharacteristic = null;
-                configCharacteristic = null;
+
+
                 updateConnectionState(cc.teil.sisyphus.mru.mobiletelemetry.R.string.connected);
                 invalidateOptionsMenu();
 
                 Toast.makeText(ViewDataActivity.this, "Connected", Toast.LENGTH_SHORT).show();
 
-            } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+            } else if (MeasurementService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 mConnected = false;
-                dataCharacteristic = null;
-                configCharacteristic = null;
+
+
                 updateConnectionState(cc.teil.sisyphus.mru.mobiletelemetry.R.string.disconnected);
                 invalidateOptionsMenu();
                 clearUI();
 
                 Toast.makeText(ViewDataActivity.this, "Disconnected", Toast.LENGTH_SHORT).show();
 
-            } else if (BluetoothLeService.ACTION_RSSI_UPDATE.equals(action)) {
+            } else if (MeasurementService.ACTION_RSSI_UPDATE.equals(action)) {
 
                 final int rssi = intent.getIntExtra("rssi", 0);
                 viewRssi.setText(String.format("%d dB", rssi));
-                rssiHistorySeries.add(new RssiPlotDataAdapter(rssi));
+                rssiHistorySeries.copyFrom((RssiHistorySeries)intent.getParcelableExtra(MeasurementService.EXTRA_RSSI_SERIES));
 
-            } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
+            } else if (MeasurementService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
 
-                BluetoothGattService service = mBluetoothLeService.getGattServiceByUUID(UUIDs.RCMON_SERVICE_UUID);
+                // What to do here?
 
-                if (service == null) {
-                    Toast.makeText(ViewDataActivity.this, "Failed to get service", Toast.LENGTH_SHORT).show();
-                    throw new RuntimeException("failed to get service");
-                }
+            } else if (MeasurementService.ACTION_DATA_AVAILABLE.equals(action)) {
 
-
-                dataCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_MEASUREMENT_UUID);
-                configCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_CONFIG_UUID);
-
-                if (dataCharacteristic == null) {
-                    Toast.makeText(ViewDataActivity.this, "Failed to read data characteristic", Toast.LENGTH_SHORT).show();
-                    throw new RuntimeException("failed to get data char");
-                }
-
-                if (configCharacteristic == null) {
-                    Toast.makeText(ViewDataActivity.this, "Failed to read config characteristic", Toast.LENGTH_SHORT).show();
-                    throw new RuntimeException("failed to get config char");
-                }
-
-                mBluetoothLeService.readCharacteristic(configCharacteristic);
-
-
-            } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-
-                UUID charUuid = UUID.fromString(intent.getStringExtra(BluetoothLeService.EXTRA_UUID));
+                UUID charUuid = UUID.fromString(intent.getStringExtra(MeasurementService.EXTRA_UUID));
 
                 if (charUuid.equals(UUIDs.RCMON_CHAR_MEASUREMENT_UUID)) {
-                    MeasurementParcel data = intent.getParcelableExtra(BluetoothLeService.EXTRA_DATA);
+                    MeasurementParcel data = intent.getParcelableExtra(MeasurementService.EXTRA_DATA);
 
                     final double cell1 = data.getVoltage(0);
                     final double cell2 = data.getVoltage(1);
@@ -201,11 +172,11 @@ public class ViewDataActivity extends Activity {
                     viewVoltageCellDiff.setText(String.format("%.0f mV", (cell2 - cell1) * 1000.0f));
                     viewCurrent.setText(String.format("%.3f A", current));
 
-                    measurementSeries.add(new MeasurementPlotDataAdapter(data));
+                    measurementSeries.copyFrom((MeasurementSeries)intent.getParcelableExtra(MeasurementService.EXTRA_MEASUREMENT_SERIES));
 
                 } else if (charUuid.equals(UUIDs.RCMON_CHAR_CONFIG_UUID)) {
-                    ConfigParcel data = intent.getParcelableExtra(BluetoothLeService.EXTRA_DATA);
-                    cellCount = data.getCellCount();
+                    ConfigParcel data = intent.getParcelableExtra(MeasurementService.EXTRA_DATA);
+                    final int cellCount = data.getCellCount();
                     Log.i(TAG, "Cell count update=" + cellCount);
 
                     plotAccelerometer.setVisibility(data.getHasAccelerometer() ? View.VISIBLE : View.GONE);
@@ -238,11 +209,11 @@ public class ViewDataActivity extends Activity {
 
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
-        intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
-        intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
-        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
-        intentFilter.addAction(BluetoothLeService.ACTION_RSSI_UPDATE);
+        intentFilter.addAction(MeasurementService.ACTION_GATT_CONNECTED);
+        intentFilter.addAction(MeasurementService.ACTION_GATT_DISCONNECTED);
+        intentFilter.addAction(MeasurementService.ACTION_GATT_SERVICES_DISCOVERED);
+        intentFilter.addAction(MeasurementService.ACTION_DATA_AVAILABLE);
+        intentFilter.addAction(MeasurementService.ACTION_RSSI_UPDATE);
 
         return intentFilter;
     }
@@ -262,8 +233,8 @@ public class ViewDataActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("measurements", measurementSeries);
-        outState.putParcelable("rssi", rssiHistorySeries);
+        //outState.putParcelable("measurements", measurementSeries);
+        //outState.putParcelable("rssi", rssiHistorySeries);
         Log.w(TAG, "onSave");
     }
 
@@ -271,10 +242,10 @@ public class ViewDataActivity extends Activity {
         try {
             if (savedInstanceState != null) {
                 if (savedInstanceState.containsKey("measurements")) {
-                    measurementSeries = savedInstanceState.getParcelable("measurements");
+                    //measurementSeries = savedInstanceState.getParcelable("measurements");
                 }
                 if (savedInstanceState.containsKey("rssi")) {
-                    rssiHistorySeries = savedInstanceState.getParcelable("rssi");
+                    //rssiHistorySeries = savedInstanceState.getParcelable("rssi");
                 }
             }
         } catch (Exception e) {
@@ -309,11 +280,11 @@ public class ViewDataActivity extends Activity {
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        Intent gattServiceIntent = new Intent(this, MeasurementService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
 
-        measurementSeries.setTimeLimit(48e3);
-        rssiHistorySeries.setTimeLimit(30e3);
+        measurementSeries.setTimeLimitMilli(48e3);
+        rssiHistorySeries.setTimeLimitMilli(30e3);
 
         createPlotCellVoltage();
         createPlotRssi();
@@ -321,7 +292,7 @@ public class ViewDataActivity extends Activity {
         createPlotCurrent();
 
         plotRedrawTimer.scheduleAtFixedRate(plotUpdate, 200, 200);
-        this.executor_.scheduleWithFixedDelay(fetchDataTimer, 1500L, 1000L, TimeUnit.MILLISECONDS);
+
     }
 
     final DecimalFormat plotTimeAxisFormat = new TimeLabelFormat();
@@ -340,14 +311,35 @@ public class ViewDataActivity extends Activity {
 
         final float textSize = 20;
         plot.getDomainLabelWidget().getLabelPaint().setTextSize(textSize);
-        plot.getDomainLabelWidget().setPaddingBottom(20);
+        plot.getDomainLabelWidget().setWidth(100);
+
+        //plot.getDomainLabelWidget().setPaddingBottom(20);
         plot.getRangeLabelWidget().getLabelPaint().setTextSize(textSize);
+        plot.getRangeLabelWidget().setHeight(150);
         plot.getLegendWidget().getTextPaint().setTextSize(textSize);
 
         plot.getGraphWidget().getDomainTickLabelPaint().setTextSize(textSize);
         plot.getGraphWidget().getRangeTickLabelPaint().setTextSize(textSize);
         plot.getGraphWidget().getDomainOriginTickLabelPaint().setTextSize(textSize);
         plot.getGraphWidget().getRangeOriginTickLabelPaint().setTextSize(textSize);
+
+
+        Paint bgPaint = new Paint();
+        bgPaint.setColor(Color.GRAY);
+        bgPaint.setStyle(Paint.Style.FILL);
+        bgPaint.setAlpha(140);
+        plot.getLegendWidget().setBackgroundPaint(bgPaint);
+
+        final int numberOfLegendEntries = plot.getSeriesRegistry().size();
+        // to draw the new legend grid:
+        plot.getLegendWidget().setSize(new Size(30 * numberOfLegendEntries, SizeLayoutType.ABSOLUTE, 100, SizeLayoutType.ABSOLUTE));
+
+        plot.getLegendWidget().setTableModel(new DynamicTableModel(1, numberOfLegendEntries));
+        plot.getLegendWidget().position(95,
+                XLayoutStyle.ABSOLUTE_FROM_LEFT,
+                45,
+                YLayoutStyle.ABSOLUTE_FROM_TOP,
+                AnchorPosition.LEFT_TOP);
     }
 
     private void createPlotCellVoltage() {
@@ -376,7 +368,6 @@ public class ViewDataActivity extends Activity {
         plot.addSeries(measurementSeries.getCellVoltage(0), series1Format);
         plot.addSeries(measurementSeries.getCellVoltage(1), series2Format);
         plot.addListener(measurementSeries);
-
 
         setCommonPlotOptions(plot, measurementSeries.getMaxSeconds());
     }
@@ -472,8 +463,8 @@ public class ViewDataActivity extends Activity {
     protected void onResume() {
         super.onResume();
         registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-        if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+        if (mMeasurementService != null) {
+            final boolean result = mMeasurementService.connect(mDeviceAddress);
             Log.d(TAG, "Connect request result=" + result);
 
             Toast.makeText(ViewDataActivity.this, result ? "Failed to connect to service": "Connected to service", Toast.LENGTH_SHORT).show();
@@ -491,7 +482,7 @@ public class ViewDataActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(mServiceConnection);
-        mBluetoothLeService = null;
+        mMeasurementService = null;
     }
 
     @Override
@@ -511,10 +502,10 @@ public class ViewDataActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_connect:
-                mBluetoothLeService.connect(mDeviceAddress);
+                mMeasurementService.connect(mDeviceAddress);
                 return true;
             case cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_disconnect:
-                mBluetoothLeService.disconnect();
+                mMeasurementService.disconnect();
                 return true;
             case android.R.id.home:
                 onBackPressed();

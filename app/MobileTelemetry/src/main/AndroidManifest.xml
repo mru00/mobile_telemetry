@@ -48,7 +48,7 @@
         <activity android:name="cc.teil.sisyphus.mru.mobiletelemetry.Activities.ViewDataActivity" />
 
         <service
-            android:name="cc.teil.sisyphus.mru.mobiletelemetry.BluetoothLeService"
+            android:name=".MeasurementService"
             android:enabled="true" />
     </application>
 
