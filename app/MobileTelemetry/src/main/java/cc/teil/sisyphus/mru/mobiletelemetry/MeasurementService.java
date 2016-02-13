@@ -19,6 +19,7 @@ package cc.teil.sisyphus.mru.mobiletelemetry;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -40,6 +41,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import cc.teil.sisyphus.mru.mobiletelemetry.Activities.ViewDataActivity;
 import cc.teil.sisyphus.mru.mobiletelemetry.Parcels.MeasurementParcel;
 import cc.teil.sisyphus.mru.mobiletelemetry.Parcels.RawByteParcel;
 import cc.teil.sisyphus.mru.mobiletelemetry.Protocol.DecodeCharacteristic;
@@ -78,6 +80,7 @@ public class MeasurementService extends Service {
     private int mConnectionState = STATE_DISCONNECTED;
 
     private boolean readCharacteristicInProgress = false;
+    private int notificationId = 101;
 
 
     private MeasurementSeries measurementSeries = new MeasurementSeries();
@@ -109,10 +112,7 @@ public class MeasurementService extends Service {
                 }
                 readCharacteristicInProgress = false;
 
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(notificationId, getNotification("Connected"));
-
+                updateNotification("Connected");
 
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 intentAction = ACTION_GATT_DISCONNECTED;
@@ -121,9 +121,7 @@ public class MeasurementService extends Service {
                 Log.i(TAG, "Disconnected from GATT server.");
                 broadcastUpdate(intentAction);
 
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(notificationId, getNotification("Disconnected"));
+                updateNotification("Disconnected");
 
             }
         }
@@ -136,14 +134,12 @@ public class MeasurementService extends Service {
 
                 if (service == null) {
                     Toast.makeText(MeasurementService.this, "Failed to get service", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     final BluetoothGattCharacteristic configCharacteristic = service.getCharacteristic(UUIDs.RCMON_CHAR_CONFIG_UUID);
 
                     if (configCharacteristic == null) {
                         Toast.makeText(MeasurementService.this, "Failed to read config characteristic", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         readCharacteristic(configCharacteristic);
                     }
 
@@ -153,7 +149,6 @@ public class MeasurementService extends Service {
                         Toast.makeText(MeasurementService.this, "Failed to read data characteristic", Toast.LENGTH_SHORT).show();
                     }
                 }
-
 
 
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
@@ -196,7 +191,6 @@ public class MeasurementService extends Service {
             }
         }
     };
-    private int notificationId = 101;
 
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
@@ -213,7 +207,7 @@ public class MeasurementService extends Service {
             Log.w(TAG, "received config");
             intent.putExtra(EXTRA_DATA, DecodeCharacteristic.decodeConfig(characteristic));
         } else if (UUIDs.isMeasurementCharacteristic(characteristic)) {
-            final MeasurementParcel data =DecodeCharacteristic.decodeMeasurement(characteristic);
+            final MeasurementParcel data = DecodeCharacteristic.decodeMeasurement(characteristic);
             measurementSeries.add(new MeasurementPlotDataAdapter(data));
             intent.putExtra(EXTRA_DATA, data);
             intent.putExtra(EXTRA_MEASUREMENT_SERIES, measurementSeries);
@@ -239,25 +233,43 @@ public class MeasurementService extends Service {
 
 
     private final ScheduledExecutorService executor_ = Executors.newSingleThreadScheduledExecutor();
+
     @Override
     public void onCreate() {
         super.onCreate();
         this.executor_.scheduleWithFixedDelay(fetchDataTimer, 1500L, 500L, TimeUnit.MILLISECONDS);
 
-
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-// notificationId allows you to update the notification later on.
-        mNotificationManager.notify(notificationId, getNotification("Started"));
+        updateNotification("Started");
     }
 
-    private Notification getNotification(String text) {
-        NotificationCompat.Builder mBuilder =
+    private void updateNotification(String text) {
+
+        final Intent notificationIntent = new Intent(this, ViewDataActivity.class);
+
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        final PendingIntent intent = PendingIntent.getActivity(this, 0,
+                notificationIntent, 0);
+
+        final NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.notification_template_icon_bg)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentIntent(intent)
                         .setContentTitle("MobileTelemetry")
                         .setContentText(text);
-        return mBuilder.build();
+
+        final Notification notification = mBuilder.build();
+
+        notification.flags |=
+                Notification.FLAG_AUTO_CANCEL
+                        | Notification.FLAG_ONGOING_EVENT
+                        | Notification.FLAG_NO_CLEAR;
+
+        final NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(notificationId, notification);
     }
 
     /**
@@ -297,8 +309,7 @@ public class MeasurementService extends Service {
                 if (!readCharacteristic(dataCharacteristic)) {
                     Log.w(TAG, "failed to read characteristic");
                 }
-            }
-            else {
+            } else {
                 readCharacteristicInProgress = true;
                 mBluetoothGatt.readRemoteRssi();
             }

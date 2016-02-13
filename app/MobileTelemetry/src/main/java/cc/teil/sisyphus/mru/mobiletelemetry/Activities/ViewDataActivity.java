@@ -219,7 +219,12 @@ public class ViewDataActivity extends Activity {
     }
 
     private void clearUI() {
+        viewConnectionState.setText("");
         viewVoltageCell1.setText("");
+        viewVoltageCell2.setText("");
+        viewVoltageCellDiff.setText("");
+        viewCurrent.setText("");
+        viewRssi.setText("");
     }
 
 
@@ -300,7 +305,7 @@ public class ViewDataActivity extends Activity {
     private void setCommonPlotOptions(XYPlot plot, double maxSeconds) {
         plot.setDomainLabel("[sec]");
         plot.setDomainValueFormat(plotTimeAxisFormat);
-        plot.getGraphWidget().setPaddingLeft(20);
+        //plot.getGraphWidget().setPaddingLeft(20);
         plot.getGraphWidget().setPaddingBottom(20);
         plot.getGraphWidget().setPaddingTop(10);
         plot.setDomainBoundaries(-maxSeconds, 0, BoundaryMode.FIXED);
@@ -345,6 +350,8 @@ public class ViewDataActivity extends Activity {
     private void createPlotCellVoltage() {
         XYPlot plot = plotCellVoltage = (XYPlot) findViewById(R.id.plotCellVoltage);
 
+        plot.setTitle("Cell Voltage");
+
         LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.RED, Color.TRANSPARENT, null);
         LineAndPointFormatter series2Format = new LineAndPointFormatter(Color.BLUE, Color.BLUE, Color.TRANSPARENT, null);
 
@@ -354,7 +361,7 @@ public class ViewDataActivity extends Activity {
 
         plot.setRangeBoundaries(-0.5, 5, BoundaryMode.FIXED);
 
-        plot.setRangeLabel("Cell Voltage [V]");
+        plot.setRangeLabel("[V]");
 
         plot.setDomainStepMode(XYStepMode.INCREMENT_BY_VAL);
         plot.setDomainStepValue(50);
@@ -376,6 +383,7 @@ public class ViewDataActivity extends Activity {
     private void createPlotCurrent() {
         XYPlot plot = plotCurrent = (XYPlot) findViewById(R.id.plotCurrent);
 
+        plot.setTitle("Current");
 
         LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.RED, Color.TRANSPARENT, null);
 
@@ -384,7 +392,7 @@ public class ViewDataActivity extends Activity {
 
         plot.setRangeBoundaries(-0.5, 60, BoundaryMode.FIXED);
 
-        plot.setRangeLabel("Current [A]");
+        plot.setRangeLabel("[A]");
 
         plot.setRangeStepMode(XYStepMode.INCREMENT_BY_VAL);
         plot.setRangeStepValue(2);
@@ -401,6 +409,7 @@ public class ViewDataActivity extends Activity {
     private void createPlotAccelerometer() {
         XYPlot plot = plotAccelerometer = (XYPlot) findViewById(R.id.plotAccelerometer);
 
+        plot.setTitle("Acceleration");
 
         LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.RED, Color.TRANSPARENT, null);
         LineAndPointFormatter series2Format = new LineAndPointFormatter(Color.BLUE, Color.BLUE, Color.TRANSPARENT, null);
@@ -412,7 +421,7 @@ public class ViewDataActivity extends Activity {
         // uncomment this line to freeze the range boundaries:
         plot.setRangeBoundaries(-5, 5, BoundaryMode.FIXED);
 
-        plot.setRangeLabel("Acceleration [g]");
+        plot.setRangeLabel("[g]");
 
 
         plot.setRangeStepMode(XYStepMode.INCREMENT_BY_VAL);
@@ -436,11 +445,13 @@ public class ViewDataActivity extends Activity {
     private void createPlotRssi() {
         final XYPlot plot = plotRssi = (XYPlot) findViewById(R.id.plotRssi);
 
+        plot.setTitle("RSSI");
+
         LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.RED, Color.TRANSPARENT, null);
 
         plot.setRangeBoundaries(-120, 0, BoundaryMode.FIXED);
 
-        plot.setRangeLabel("RSSI [dB]");
+        plot.setRangeLabel("[dB]");
 
         plot.setDomainStepMode(XYStepMode.INCREMENT_BY_VAL);
         plot.setDomainStepValue(5);
@@ -468,7 +479,6 @@ public class ViewDataActivity extends Activity {
             Log.d(TAG, "Connect request result=" + result);
 
             Toast.makeText(ViewDataActivity.this, result ? "Failed to connect to service": "Connected to service", Toast.LENGTH_SHORT).show();
-
         }
     }
 
