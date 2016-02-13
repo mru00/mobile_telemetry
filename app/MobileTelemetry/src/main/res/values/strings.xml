@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2013 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -36,4 +35,7 @@
     <string name="label_voltage_cell1">Voltage Cell 1</string>
     <string name="label_voltage_cell2">Voltage Cell 2</string>
     <string name="label_voltage_diff">Voltage diff.</string>
+    <string name="title_activity_about">About</string>
+    <string name="menu_about">About</string>
+    <string name="menu_select_device">Select Device</string>
 </resources>

@@ -224,7 +224,7 @@ STATIC_ASSERT(sizeof (adxl345_fifo_ctl_t) == 1);
 STATIC_ASSERT(sizeof (adxl345_power_ctl_t) == 1);
 
 ret_code_t adxl345_init(nrf_drv_twi_t const * const twi);
-ret_code_t adxl345_read_values(nrf_drv_twi_t const * const twi, int16_t* values);
+ret_code_t adxl345_read_values(nrf_drv_twi_t const * const twi, volatile int16_t* values);
 
 
 #endif /* ADXL345_H */

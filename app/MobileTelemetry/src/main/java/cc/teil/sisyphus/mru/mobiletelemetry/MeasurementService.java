@@ -86,11 +86,6 @@ public class MeasurementService extends Service {
     private MeasurementSeries measurementSeries = new MeasurementSeries();
     private RssiHistorySeries rssiHistorySeries = new RssiHistorySeries();
 
-//    private final CalibrationDataSource cds = new CalibrationDataSource(this);
-//    private final Calibration calibCell1 = cds.getCalibration("cell1");
-//    private final Calibration calibCell2 = cds.getCalibration("cell2");
-//    private final Calibration calibCurrent = cds.getCalibration("current");
-
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
@@ -261,15 +256,11 @@ public class MeasurementService extends Service {
 
         final Notification notification = mBuilder.build();
 
-        notification.flags |=
-                Notification.FLAG_AUTO_CANCEL
+        notification.flags |= Notification.FLAG_AUTO_CANCEL
                         | Notification.FLAG_ONGOING_EVENT
                         | Notification.FLAG_NO_CLEAR;
 
-        final NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        mNotificationManager.notify(notificationId, notification);
+        getNotificationManager().notify(notificationId, notification);
     }
 
     /**
@@ -297,7 +288,7 @@ public class MeasurementService extends Service {
         return true;
     }
 
-    private static boolean dataOrRssi = false;
+    private static boolean dataOrRssi = true;
     private BluetoothGattCharacteristic dataCharacteristic;
     private final Runnable fetchDataTimer = new Runnable() {
         @Override
@@ -436,6 +427,11 @@ public class MeasurementService extends Service {
         */
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getNotificationManager().cancel(notificationId);
+    }
 
     public class LocalBinder extends Binder {
         public MeasurementService getService() {
@@ -443,4 +439,7 @@ public class MeasurementService extends Service {
         }
     }
 
+    private NotificationManager getNotificationManager() {
+        return (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    }
 }

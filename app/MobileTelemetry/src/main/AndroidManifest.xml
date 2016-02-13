@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  Copyright 2013 The Android Open Source Project
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,42 +13,59 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-
-
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cc.teil.sisyphus.mru.mobiletelemetry"
     android:versionCode="1"
     android:versionName="1.0">
 
     <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
-    
-    <!-- Declare this required feature if you want to make the app available to BLE-capable
+
+
+    <!--
+    Declare this required feature if you want to make the app available to BLE-capable
     devices only.  If you want to make your app available to devices that don't support BLE,
     you should omit this in the manifest.  Instead, determine BLE capability by using
-    PackageManager.hasSystemFeature(FEATURE_BLUETOOTH_LE) -->
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    PackageManager.hasSystemFeature(FEATURE_BLUETOOTH_LE)
+    -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.DeviceDefault">
+
         <activity
-            android:name="cc.teil.sisyphus.mru.mobiletelemetry.Activities.ConnectBleActivity"
-            android:label="@string/app_name">
+            android:name=".Activities.ViewDataActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="cc.teil.sisyphus.mru.mobiletelemetry.Activities.ViewDataActivity" />
+
+        <activity
+            android:name=".Activities.SelectDeviceActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Activities.ViewDataActivity" />
+
+        <activity
+            android:name=".Activities.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Activities.ViewDataActivity" />
 
         <service
             android:name=".MeasurementService"
             android:enabled="true" />
+
     </application>
 
 </manifest>

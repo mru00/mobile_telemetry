@@ -23,4 +23,12 @@
           android:title="@string/menu_disconnect"
           android:orderInCategory="101"
           app:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/menu_select_device"
+        android:title="@string/menu_select_device"
+        android:orderInCategory="102"
+        app:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/menu_about"
+        android:title="@string/menu_about"
+        android:orderInCategory="102"
+        app:showAsAction="ifRoom|withText"/>
 </menu>

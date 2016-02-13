@@ -30,14 +30,12 @@
 
 typedef struct ble_rcmon_s ble_rcmon_t;
 
-#define MAX_NUMBER_OF_CELLS 3
+#define MAX_NUMBER_OF_CELLS 2
 
 typedef struct __attribute__((__packed__)){
     uint16_t vcell[MAX_NUMBER_OF_CELLS];
     uint16_t current;
-    uint16_t acc_x;
-    uint16_t acc_y;
-    uint16_t acc_z;
+    int16_t accelerometer[3];
 } ble_rcmon_data_t;
 
 typedef struct __attribute__((__packed__)){

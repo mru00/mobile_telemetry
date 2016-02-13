@@ -175,15 +175,11 @@ void adxl345_timer_schedule_func(void * p_context) {
 
     //LOG("[ADXL345]     reading adxl  1");
 
-    int16_t data[3];
-    err_code = adxl345_read_values(&m_twi, data);
+    m_rcmon_data.accelerometer[0] = 1000;
+    m_rcmon_data.accelerometer[1] = 1000;
+    m_rcmon_data.accelerometer[2] = 1000;
+    err_code = adxl345_read_values(&m_twi, m_rcmon_data.accelerometer);
     APP_ERROR_CHECK(err_code);
-
-    m_rcmon_data.acc_x = data[0];
-    m_rcmon_data.acc_y = data[1];
-    m_rcmon_data.acc_z = data[2];
-
-    LOG("received adxl %d %d %d", data[0], data[1], data[2]);
 }
 
 void ads1115_timer_schedule_func(void * p_context) {

@@ -38,7 +38,7 @@ typedef struct __attribute__((__packed__)){
 public class DecodeCharacteristic {
 
     private static double scaleAcc(int in) {
-        return (double) in / (double) ((2 << 12) - 1);
+        return (double) in / (double) ((2 << 7) - 1);
     }
 
     private static double scaleAdc(int in, double pga) {
@@ -64,18 +64,18 @@ public class DecodeCharacteristic {
 
         final int cell1 = characteristic.getIntValue(FORMAT_SINT16, 0);
         final int cell2 = characteristic.getIntValue(FORMAT_SINT16, 2);
-        final int cell3 = characteristic.getIntValue(FORMAT_SINT16, 4);
-        final int current = characteristic.getIntValue(FORMAT_SINT16, 6);
-        final int acc_x = characteristic.getIntValue(FORMAT_SINT16, 8);
-        final int acc_y = characteristic.getIntValue(FORMAT_SINT16, 10);
-        final int acc_z = characteristic.getIntValue(FORMAT_SINT16, 12);
+        //final int cell3 = characteristic.getIntValue(FORMAT_SINT16, 4);
+        final int current = characteristic.getIntValue(FORMAT_SINT16, 4);
+        final int acc_x = characteristic.getIntValue(FORMAT_SINT16, 6);
+        final int acc_y = characteristic.getIntValue(FORMAT_SINT16, 8);
+        final int acc_z = characteristic.getIntValue(FORMAT_SINT16, 10);
 
         double voltageDivider = 3.;
         data.setVoltage(new double[]{voltageDivider * scaleAdc(cell1, 1), voltageDivider * scaleAdc(cell2, 1)});
         data.setCurrent(voltToAmpere(scaleAdc(current, 16)));
         data.setAcc_x(scaleAcc(acc_x));
         data.setAcc_y(scaleAcc(acc_y));
-        data.setAcc_z(scaleAcc(acc_z));
+        data.setAcc_z(scaleAcc(acc_z)-5.);
 
         return data;
     }

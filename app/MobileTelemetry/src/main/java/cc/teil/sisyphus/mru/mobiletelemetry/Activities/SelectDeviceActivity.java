@@ -46,7 +46,8 @@ import cc.teil.sisyphus.mru.mobiletelemetry.R;
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
-public class ConnectBleActivity extends ListActivity {
+public class SelectDeviceActivity extends ListActivity {
+
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
@@ -54,18 +55,17 @@ public class ConnectBleActivity extends ListActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
     private Handler mHandler;
-    private static final String TAG = ConnectBleActivity.class.getSimpleName();
+    private static final String TAG = SelectDeviceActivity.class.getSimpleName();
+
     // Device scan callback.
     private BluetoothAdapter.LeScanCallback mLeScanCallback =
             new BluetoothAdapter.LeScanCallback() {
 
                 @Override
                 public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
-                    Log.w(TAG, "callback");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             mLeDeviceListAdapter.addDevice(device);
                             mLeDeviceListAdapter.notifyDataSetChanged();
                         }
@@ -86,6 +86,8 @@ public class ConnectBleActivity extends ListActivity {
             finish();
         }
 
+        getActionBar().setDisplayHomeAsUpEnabled(false);
+
         // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
         // BluetoothAdapter through BluetoothManager.
         final BluetoothManager bluetoothManager =
@@ -101,14 +103,9 @@ public class ConnectBleActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(cc.teil.sisyphus.mru.mobiletelemetry.R.menu.main, menu);
-        if (!mScanning) {
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_stop).setVisible(false);
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_scan).setVisible(true);
-        } else {
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_stop).setVisible(true);
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_scan).setVisible(false);
-        }
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.menu_stop).setVisible(mScanning);
+        menu.findItem(R.id.menu_scan).setVisible(!mScanning);
         return true;
     }
 
@@ -134,8 +131,8 @@ public class ConnectBleActivity extends ListActivity {
         // fire an intent to display a dialog asking the user to grant permission to enable it.
         if (!mBluetoothAdapter.isEnabled()) {
 
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 
         }
 
@@ -167,6 +164,7 @@ public class ConnectBleActivity extends ListActivity {
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
         if (device == null) return;
         final Intent intent = new Intent(this, ViewDataActivity.class);
+
         intent.putExtra(ViewDataActivity.EXTRAS_DEVICE_NAME, device.getName());
         intent.putExtra(ViewDataActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
         if (mScanning) {
@@ -210,12 +208,11 @@ public class ConnectBleActivity extends ListActivity {
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = ConnectBleActivity.this.getLayoutInflater();
+            mInflator = SelectDeviceActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
-            Log.w(TAG, "here");
-            if(!mLeDevices.contains(device)) {
+            if (!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }
         }

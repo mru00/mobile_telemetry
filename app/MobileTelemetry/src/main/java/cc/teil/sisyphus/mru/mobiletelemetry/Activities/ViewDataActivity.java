@@ -37,7 +37,6 @@ import android.widget.Toast;
 
 import com.androidplot.ui.AnchorPosition;
 import com.androidplot.ui.DynamicTableModel;
-import com.androidplot.ui.FixedTableModel;
 import com.androidplot.ui.Size;
 import com.androidplot.ui.SizeLayoutType;
 import com.androidplot.ui.XLayoutStyle;
@@ -151,7 +150,7 @@ public class ViewDataActivity extends Activity {
 
                 final int rssi = intent.getIntExtra("rssi", 0);
                 viewRssi.setText(String.format("%d dB", rssi));
-                rssiHistorySeries.copyFrom((RssiHistorySeries)intent.getParcelableExtra(MeasurementService.EXTRA_RSSI_SERIES));
+                rssiHistorySeries.copyFrom((RssiHistorySeries) intent.getParcelableExtra(MeasurementService.EXTRA_RSSI_SERIES));
 
             } else if (MeasurementService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
 
@@ -172,7 +171,7 @@ public class ViewDataActivity extends Activity {
                     viewVoltageCellDiff.setText(String.format("%.0f mV", (cell2 - cell1) * 1000.0f));
                     viewCurrent.setText(String.format("%.3f A", current));
 
-                    measurementSeries.copyFrom((MeasurementSeries)intent.getParcelableExtra(MeasurementService.EXTRA_MEASUREMENT_SERIES));
+                    measurementSeries.copyFrom((MeasurementSeries) intent.getParcelableExtra(MeasurementService.EXTRA_MEASUREMENT_SERIES));
 
                 } else if (charUuid.equals(UUIDs.RCMON_CHAR_CONFIG_UUID)) {
                     ConfigParcel data = intent.getParcelableExtra(MeasurementService.EXTRA_DATA);
@@ -238,23 +237,26 @@ public class ViewDataActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //outState.putParcelable("measurements", measurementSeries);
-        //outState.putParcelable("rssi", rssiHistorySeries);
+        outState.putString(EXTRAS_DEVICE_NAME, mDeviceName);
+        outState.putString(EXTRAS_DEVICE_ADDRESS, mDeviceAddress);
         Log.w(TAG, "onSave");
     }
 
     private void loadInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return;
+        }
+
         try {
-            if (savedInstanceState != null) {
-                if (savedInstanceState.containsKey("measurements")) {
-                    //measurementSeries = savedInstanceState.getParcelable("measurements");
-                }
-                if (savedInstanceState.containsKey("rssi")) {
-                    //rssiHistorySeries = savedInstanceState.getParcelable("rssi");
-                }
+            if (mDeviceName == null && savedInstanceState.containsKey(EXTRAS_DEVICE_NAME)) {
+                mDeviceName = savedInstanceState.getString(EXTRAS_DEVICE_NAME);
+            }
+            if (mDeviceAddress == null && savedInstanceState.containsKey(EXTRAS_DEVICE_ADDRESS)) {
+                mDeviceAddress = savedInstanceState.getString(EXTRAS_DEVICE_ADDRESS);
             }
         } catch (Exception e) {
             Log.e(TAG, "loadInstanceState", e);
+            Toast.makeText(this, "Failed to load instance state", Toast.LENGTH_SHORT);
         }
     }
 
@@ -262,31 +264,40 @@ public class ViewDataActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.w(TAG, "onCreate");
-        loadInstanceState(savedInstanceState);
 
 
-        setContentView(cc.teil.sisyphus.mru.mobiletelemetry.R.layout.gatt_services_characteristics);
+        setContentView(cc.teil.sisyphus.mru.mobiletelemetry.R.layout.activity_view_data);
 
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
 
+        loadInstanceState(savedInstanceState);
+
+
         // Sets up UI references.
         ((TextView) findViewById(cc.teil.sisyphus.mru.mobiletelemetry.R.id.device_address)).setText(mDeviceAddress);
 
-
         viewConnectionState = (TextView) findViewById(cc.teil.sisyphus.mru.mobiletelemetry.R.id.connection_state);
-
         viewVoltageCell1 = (TextView) findViewById(cc.teil.sisyphus.mru.mobiletelemetry.R.id.voltage);
         viewVoltageCell2 = (TextView) findViewById(cc.teil.sisyphus.mru.mobiletelemetry.R.id.voltageCell2);
         viewVoltageCellDiff = (TextView) findViewById(cc.teil.sisyphus.mru.mobiletelemetry.R.id.voltageDifference);
         viewCurrent = (TextView) findViewById(R.id.current);
         viewRssi = (TextView) findViewById(R.id.rssi);
 
+        if (mDeviceName == null) {
+            Toast.makeText(this, "No device selected", Toast.LENGTH_SHORT);
+            getActionBar().setTitle("No device selected");
+            final Intent nextIntent = new Intent(this, SelectDeviceActivity.class);
+            startActivity(nextIntent);
+            return;
+        }
+
         getActionBar().setTitle(mDeviceName);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, MeasurementService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        getActionBar().setDisplayHomeAsUpEnabled(false);
 
         measurementSeries.setTimeLimitMilli(48e3);
         rssiHistorySeries.setTimeLimitMilli(30e3);
@@ -477,8 +488,7 @@ public class ViewDataActivity extends Activity {
         if (mMeasurementService != null) {
             final boolean result = mMeasurementService.connect(mDeviceAddress);
             Log.d(TAG, "Connect request result=" + result);
-
-            Toast.makeText(ViewDataActivity.this, result ? "Failed to connect to service": "Connected to service", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewDataActivity.this, result ? "Failed to connect to service" : "Connected to service", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -497,26 +507,31 @@ public class ViewDataActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(cc.teil.sisyphus.mru.mobiletelemetry.R.menu.gatt_services, menu);
-        if (mConnected) {
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_connect).setVisible(false);
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_disconnect).setVisible(true);
-        } else {
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_connect).setVisible(true);
-            menu.findItem(cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_disconnect).setVisible(false);
-        }
+        getMenuInflater().inflate(R.menu.gatt_services, menu);
+        menu.findItem(R.id.menu_connect).setVisible(!mConnected);
+        menu.findItem(R.id.menu_disconnect).setVisible(mConnected);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_connect:
+            case R.id.menu_connect:
                 mMeasurementService.connect(mDeviceAddress);
                 return true;
-            case cc.teil.sisyphus.mru.mobiletelemetry.R.id.menu_disconnect:
+            case R.id.menu_disconnect:
                 mMeasurementService.disconnect();
                 return true;
+            case R.id.menu_about: {
+                final Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.menu_select_device: {
+                final Intent intent = new Intent(this, SelectDeviceActivity.class);
+                startActivity(intent);
+                return true;
+            }
             case android.R.id.home:
                 onBackPressed();
                 return true;

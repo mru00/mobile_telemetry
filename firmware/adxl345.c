@@ -18,13 +18,12 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
         .spi = ADXL345_DATA_FORMAT_SPI_3WIRE,
         .int_invert = ADXL345_DATA_FORMAT_INT_ACTIVE_HIGH,
         .full_res = ADXL345_DATA_FORMAT_RES_FULL,
-        .justify = ADXL345_DATA_FORMAT_JUSTIFY_LEFT,
-//                .justify = ADXL345_DATA_FORMAT_JUSTIFY_RIGHT,
-        .range = ADXL345_DATA_FORMAT_RANGE_4
+        .justify = ADXL345_DATA_FORMAT_JUSTIFY_RIGHT,
+        .range = ADXL345_DATA_FORMAT_RANGE_16
     };
 
     const adxl345_int_map_t im = {
-        .data_ready = ADXL345_INT_MAP_INT0,
+        .data_ready = ADXL345_INT_MAP_INT1,
         .single_tap = ADXL345_INT_MAP_INT0,
         .double_tap = ADXL345_INT_MAP_INT0,
         .activity = ADXL345_INT_MAP_INT0,
@@ -36,13 +35,13 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
 
     const adxl345_fifo_ctl_t fc = {
         .trigger = ADXL345_FIFO_TRIGGER_INT1,
-        .samples = 12,
+        .samples = 0,
         .mode = ADXL345_FIFO_MODE_BYPASS
     };
 
     const adxl345_bw_mode_t bw = {
         .power = ADXL345_BW_LOW_POWER_NORMAL,
-        .rate = ADXL345_ODR_3_13
+        .rate = ADXL345_ODR_12_5
     };
 
     const adxl345_power_ctl_t pc = {
@@ -119,9 +118,9 @@ ret_code_t adxl345_init(nrf_drv_twi_t const * const twi) {
     return NRF_SUCCESS;
 }
 
-ret_code_t adxl345_read_values(nrf_drv_twi_t const * const twi, int16_t* values) {
+ret_code_t adxl345_read_values(nrf_drv_twi_t const * const twi, volatile int16_t* values) {
     ret_code_t err_code = NRF_SUCCESS;
-    uint8_t trx[6];
+    uint8_t trx[6] = {0};
     
     trx[0] = ADXL345_REG_DATAX0;
     err_code = nrf_drv_twi_tx(twi, ADXL345_SELECTED_ADDR, trx, 1, false);
@@ -130,8 +129,6 @@ ret_code_t adxl345_read_values(nrf_drv_twi_t const * const twi, int16_t* values)
     err_code = nrf_drv_twi_rx(twi, ADXL345_SELECTED_ADDR, trx, 6, false);
     APP_ERROR_CHECK(err_code);
     
-    //app_trace_dump(trx, 6);
-
     values[0] = trx[0] | (trx[1] << 8);
     values[1] = trx[2] | (trx[3] << 8);
     values[2] = trx[4] | (trx[5] << 8);

@@ -175,9 +175,9 @@ uint32_t ble_rcmon_init(ble_rcmon_t * p_rcmon, const ble_rcmon_init_t * p_rcmon_
     err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_rcmon->service_handle);
     APP_ERROR_CHECK(err_code);
 
-    p_rcmon_init->pdata->acc_x = 1000;
-    p_rcmon_init->pdata->acc_y = 2000;
-    p_rcmon_init->pdata->acc_z = 3000;
+    p_rcmon_init->pdata->accelerometer[0] = 1000;
+    p_rcmon_init->pdata->accelerometer[1] = 2000;
+    p_rcmon_init->pdata->accelerometer[2] = 3000;
 
     // Add characteristics.
     err_code = data_char_add(p_rcmon, p_rcmon_init);
